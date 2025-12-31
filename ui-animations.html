@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSAP UI Motion Patterns</title>
+  <link rel="stylesheet" href="./ui-styles.css">
+</head>
+<body>
+  <main class="page">
+    <header class="page__header page__header--hero">
+      <div class="hero-shell">
+        <div class="hero-copy">
+          <div class="eyebrow hero-eyebrow">GSAP UI Library</div>
+          <h1 class="page__title">UI Motion Patterns, Ready to Copy</h1>
+          <p class="page__lede hero__lede">
+            Pick a pattern, hit play, and copy the snippet. Each menu, card, modal, and button demo uses one simple timeline you can drop into
+            your project without deep GSAP knowledge.
+          </p>
+          <div class="hero-badges">
+            <span class="hero-badge">Beginner friendly</span>
+            <span class="hero-badge">Transforms + opacity only</span>
+            <span class="hero-badge">Open/close with one timeline</span>
+          </div>
+          <div class="hero-actions">
+            <a class="cta cta--primary" href="#hero">Preview patterns</a>
+            <a class="cta cta--ghost" href="./index.html">Go to text animation page</a>
+          </div>
+          <div class="hero-meta">
+            <div class="meta-block">
+              <p class="meta-label">Patterns</p>
+              <p class="meta-value">7</p>
+              <p class="meta-desc">Hero, nav, cards, modal</p>
+            </div>
+            <div class="meta-block">
+              <p class="meta-label">Setup</p>
+              <p class="meta-value">Import + init</p>
+              <p class="meta-desc">One function per pattern</p>
+            </div>
+            <div class="meta-block">
+              <p class="meta-label">Smooth by default</p>
+              <p class="meta-value">Transforms</p>
+              <p class="meta-desc">Opacity + GPU friendly</p>
+            </div>
+          </div>
+          <div class="top-nav top-nav--hero">
+            <a class="nav-link" href="./index.html">Text animations</a>
+            <a class="nav-link active" href="./ui-animations.html" aria-current="page">UI motion patterns (current)</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card__header">
+            <span class="hero-chip">UI motion</span>
+            <span class="hero-chip hero-chip--ghost">No build needed</span>
+            <span class="hero-chip hero-chip--accent">MatchMedia ready</span>
+          </div>
+          <div class="hero-card__body">
+            <ul class="hero-card__list">
+              <li class="hero-card__item">
+                <span class="hero-card__icon" aria-hidden="true">✓</span>
+                <div class="hero-card__copy">
+                  <p class="hero-card__title">State control</p>
+                  <p class="hero-card__desc">Open/close handled by one timeline.</p>
+                </div>
+              </li>
+              <li class="hero-card__item">
+                <span class="hero-card__icon" aria-hidden="true">✓</span>
+                <div class="hero-card__copy">
+                  <p class="hero-card__title">Smooth by default</p>
+                  <p class="hero-card__desc">Transforms + opacity only.</p>
+                </div>
+              </li>
+              <li class="hero-card__item">
+                <span class="hero-card__icon" aria-hidden="true">✓</span>
+                <div class="hero-card__copy">
+                  <p class="hero-card__title">Simple setup</p>
+                  <p class="hero-card__desc">Import GSAP and init the pattern.</p>
+                </div>
+              </li>
+            </ul>
+            <pre class="hero-card__code"><code>const tl = gsap.timeline({ paused: true, defaults:{ ease: Motion.ease.out, duration: Motion.duration.md }});
+tl.fromTo(".nav__panel",
+  { x: "105vw", autoAlpha: 0 },
+  { x: 0, autoAlpha: 1, pointerEvents: "auto" }
+);
+const toggle = () => (tl.reversed() || tl.progress() === 0 ? tl.play() : tl.reverse());</code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="page__notice">
+        <div class="info-card">
+          <details class="setup-box">
+            <summary>Setup notes</summary>
+            <div class="setup-box__content">
+              <h4 class="setup-heading">CDN & imports</h4>
+              <ul>
+                <li>ES module CDN (Skypack) in <code>js/gsapSetup.js</code>; serve over HTTP(s).</li>
+                <li>Explicit plugin registration kept in one place.</li>
+              </ul>
+              <h4 class="setup-heading">Modules & structure</h4>
+              <ul>
+                <li>Scripts use <code>type="module"</code>; patterns are split into modules.</li>
+                <li>Controls here are demo-only—wire timelines to your app state in production.</li>
+              </ul>
+              <h4 class="setup-heading">Motion defaults</h4>
+              <ul>
+                <li>Transforms/opacity only; <code>prefers-reduced-motion</code> handled via <code>gsap.matchMedia()</code>.</li>
+              </ul>
+              <h4 class="setup-heading">CDN options</h4>
+              <pre><code>// Skypack (used)
+import { gsap } from "https://cdn.skypack.dev/gsap@3.12.5";
+import { ScrollTrigger } from "https://cdn.skypack.dev/gsap@3.12.5/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
+// jsDelivr (alternative)
+import { gsap } from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js";
+import { ScrollTrigger } from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js";
+gsap.registerPlugin(ScrollTrigger);</code></pre>
+            </div>
+          </details>
+        </div>
+      </div>
+    </header>
+
+    <section class="panel panel--alt" id="hero">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 1</p>
+        <h2 class="panel__title">Hero Parallax Focus</h2>
+        <p class="panel__body">Mouse/touch move drives a lightweight parallax group with reset control.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <div class="hero">
+              <div class="hero__bg"></div>
+              <div class="hero__circle"></div>
+              <div class="hero__content">
+                <h3 class="hero__headline">Guide users with depth.</h3>
+                <p class="hero__subhead">Foreground and accent layers respond to input; tap Reset to return to neutral.</p>
+                <button id="heroReset" class="button">Reset Parallax</button>
+              </div>
+            </div>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const hero = document.querySelector(".hero");
+const circle = hero.querySelector(".hero__circle");
+const content = hero.querySelector(".hero__content");
+const bg = hero.querySelector(".hero__bg");
+
+const handleMove = (e) =&gt; {
+  const rect = hero.getBoundingClientRect();
+  const x = ((e.clientX ?? rect.width/2) - rect.left) / rect.width - 0.5;
+  const y = ((e.clientY ?? rect.height/2) - rect.top) / rect.height - 0.5;
+  gsap.to(circle, { x: x * 30, y: y * 30, duration: 0.3, ease: "power2.out" });
+  gsap.to(content,{ x: x * 12, y: y * 10, duration: 0.3, ease: "power2.out" });
+  gsap.to(bg,     { x: x * 8,  y: y * 6,  duration: 0.35, ease: "power2.out" });
+};
+
+hero.addEventListener("pointermove", handleMove);
+hero.addEventListener("pointerleave", () =&gt; gsap.to([circle,content,bg], { x:0, y:0, duration:0.4 }));</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Markup: keep three layers inside <code>.hero</code> (<code>.hero__bg</code>, <code>.hero__circle</code>, <code>.hero__content</code>).</li>
+                  <li>Import <code>initHero</code> (bundled via <code>ui.js</code>) and call after DOM ready; no ScrollTrigger needed.</li>
+                  <li>Add a reset button if you want manual neutral state; otherwise pointerleave handles it.</li>
+                  <li>Serve over HTTP(S) so the ES module imports resolve correctly.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Parallax strength:
+                    <pre><code>gsap.to(circle, { x: x * 30, y: y * 30 });
+gsap.to(content,{ x: x * 12, y: y * 10 });
+gsap.to(bg,     { x: x * 8,  y: y * 6  });</code></pre>
+                  </li>
+                  <li>Feel (snappier):
+                    <pre><code>gsap.to(circle, { duration: 0.2, ease: "power2.out" });</code></pre>
+                  </li>
+                  <li>Mobile tolerance: clamp multipliers or reduce them before the tweens.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="nav">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 2</p>
+        <h2 class="panel__title">Nav Drawer</h2>
+        <p class="panel__body">Timeline-as-state-machine for an overlay nav, reversible via the toggle.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <button id="navToggle" class="button button--pill" aria-expanded="false">Open Menu</button>
+            <div class="nav">
+              <div class="nav__panel">
+                <div class="nav__header">
+                  <span class="nav__title">Menu</span>
+                  <button class="button button--ghost" id="navClose">Close</button>
+                </div>
+                <ul class="nav__links">
+                  <li>Overview</li>
+                  <li>Case Studies</li>
+                  <li>Platform</li>
+                  <li>Contact</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const panel = document.querySelector(".nav__panel");
+gsap.set(panel, { pointerEvents: "none", x: "105vw" });
+
+const tl = gsap.timeline({ paused:true, defaults:{ ease: Motion.ease.out, duration: Motion.duration.md }})
+  .fromTo(panel, { x:"105vw", autoAlpha:0 }, { x:0, autoAlpha:1, pointerEvents:"auto" });
+
+const toggleHandler = () =&gt; (tl.reversed() || tl.progress() === 0 ? tl.play() : tl.reverse());
+navToggle.addEventListener("click", toggleHandler);
+navClose.addEventListener("click", () =&gt; tl.reverse());</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Markup: fixed <code>.nav__panel</code> on the right with toggle and close buttons.</li>
+                  <li>Init: import <code>initNav</code> (via <code>ui.js</code>) and call after DOM ready.</li>
+                  <li>State: the timeline controls all motion; drive it from your own toggles if you change button IDs.</li>
+                  <li>Pointer safety: panel starts with <code>pointer-events:none</code>; timeline sets it to auto on open.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Off-canvas distance:
+                    <pre><code>fromTo(panel, { x: "110vw" }, { x: 0, autoAlpha: 1 })</code></pre>
+                  </li>
+                  <li>Width:
+                    <pre><code>.nav__panel { width: min(360px, 90vw); }</code></pre>
+                  </li>
+                  <li>Feel:
+                    <pre><code>const tl = gsap.timeline({ defaults:{ duration: 0.35, ease: "power3.out" }});</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel--alt" id="cards">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 3</p>
+        <h2 class="panel__title">Card Hover Lift</h2>
+        <p class="panel__body">Hover/focus timelines lift cards with staggered overlay hints.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <div class="card-grid">
+              <article class="card">
+                <div class="card__meta">Signal</div>
+                <h3 class="card__title">Live metrics</h3>
+                <p class="card__copy">Surface live telemetry with a soft tilt.</p>
+              </article>
+              <article class="card">
+                <div class="card__meta">Design</div>
+                <h3 class="card__title">Polished handoffs</h3>
+                <p class="card__copy">Motion specs built-in via tokens.</p>
+              </article>
+              <article class="card">
+                <div class="card__meta">Launch</div>
+                <h3 class="card__title">Faster ships</h3>
+                <p class="card__copy">Reversible timelines minimize bugs.</p>
+              </article>
+            </div>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const tl = gsap.timeline({ paused:true, defaults:{ ease: Motion.ease.out, duration: Motion.duration.sm }});
+tl.to(card, { y:-6, rotateX:2, rotateY:-2, boxShadow:"0 20px 40px rgba(0,0,0,0.35)" })
+  .to(card, { "--overlay": 1 }, 0);
+card.addEventListener("pointerenter", () =&gt; tl.play());
+card.addEventListener("pointerleave", () =&gt; tl.reverse());
+card.addEventListener("focus", () =&gt; tl.play());
+card.addEventListener("blur", () =&gt; tl.reverse());</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Markup: use <code>.card</code> elements with the provided ::after overlay (already in CSS).</li>
+                  <li>Init: import <code>initCards</code> (via <code>ui.js</code>) and call after DOM ready.</li>
+                  <li>Access: hover/focus both drive the timeline; keep semantic elements for keyboard users.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Lift/tilt:
+                    <pre><code>to(card, { y: -10, rotateX: 3, rotateY: -3 })</code></pre>
+                  </li>
+                  <li>Overlay:
+                    <pre><code>to(card, { "--overlay": 1.2 }) /* plus adjust ::after gradient */</code></pre>
+                  </li>
+                  <li>Shadow:
+                    <pre><code>to(card, { boxShadow: "0 24px 50px rgba(0,0,0,0.45)" })</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="accordion">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 4</p>
+        <h2 class="panel__title">Accordion State</h2>
+        <p class="panel__body">Each item owns a reversible timeline; only one open at a time.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <div class="accordion">
+              <button class="accordion__item" data-acc>
+                <span>Performance</span>
+                <span class="accordion__chevron">›</span>
+                <div class="accordion__content">Transforms + opacity keep frames smooth; avoid layout properties.</div>
+              </button>
+              <button class="accordion__item" data-acc>
+                <span>Cleanup</span>
+                <span class="accordion__chevron">›</span>
+                <div class="accordion__content">Kill timelines on teardown to prevent ghost styles.</div>
+              </button>
+              <button class="accordion__item" data-acc>
+                <span>Accessibility</span>
+                <span class="accordion__chevron">›</span>
+                <div class="accordion__content">Honor prefers-reduced-motion; keep focus states intact.</div>
+              </button>
+            </div>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const tl = gsap.timeline({ paused: true, defaults:{ ease: Motion.ease.out, duration: Motion.duration.sm } })
+  .fromTo(content, { autoAlpha: 0, maxHeight: 0, y: -6 }, { autoAlpha: 1, maxHeight: 200, y: 0 })
+  .fromTo(chevron, { rotate: 0 }, { rotate: 90 }, 0);
+
+item.addEventListener("click", () =&gt; {
+  const isOpen = tl.progress() &gt; 0 && !tl.reversed();
+  timelines.forEach((otherTl, otherItem) =&gt; {
+    if (otherItem !== item) otherTl.reverse();
+  });
+  isOpen ? tl.reverse() : tl.play();
+});</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Markup: each accordion trigger has <code>data-acc</code>, contains a <code>.accordion__content</code> and <code>.accordion__chevron</code>.</li>
+                  <li>Init: import <code>initAccordion</code> and call after DOM ready.</li>
+                  <li>Behavior: one-open-at-a-time handled in JS; keep triggers as buttons for accessibility.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Content height:
+                    <pre><code>fromTo(content, { maxHeight: 0 }, { maxHeight: 320 })</code></pre>
+                  </li>
+                  <li>Ease/duration:
+                    <pre><code>const tl = gsap.timeline({ defaults:{ duration: 0.2, ease: "power1.out" }});</code></pre>
+                  </li>
+                  <li>Chevron:
+                    <pre><code>fromTo(chevron, { rotate: 0 }, { rotate: 135 })</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel--alt" id="modal">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 5</p>
+        <h2 class="panel__title">Modal Fly + Dim</h2>
+        <p class="panel__body">Modal timeline handles dimmer + panel; reversible for close.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <button id="modalOpen" class="button button--pill">Open Modal</button>
+            <div class="modal" aria-hidden="true">
+              <div class="modal__overlay"></div>
+              <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Example modal">
+                <h3>Stay in flow</h3>
+                <p>Timelines unify overlay and panel motion. Reverse to close cleanly.</p>
+                <button id="modalClose" class="button button--ghost">Close</button>
+              </div>
+            </div>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const tl = gsap.timeline({ paused:true, defaults:{ ease: Motion.ease.out, duration: Motion.duration.md }})
+  .fromTo(overlay, { autoAlpha:0 }, { autoAlpha:1, pointerEvents:"auto" })
+  .fromTo(panel, { y:40, autoAlpha:0 }, { y:0, autoAlpha:1, pointerEvents:"auto" }, 0);
+
+openBtn.addEventListener("click", () =&gt; tl.play());
+closeBtn.addEventListener("click", () =&gt; tl.reverse());
+overlay.addEventListener("click", () =&gt; tl.reverse());</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Markup: overlay + panel inside <code>.modal</code>; provide open/close buttons.</li>
+                  <li>Init: import <code>initModal</code> and call after DOM ready; timeline manages both overlay and panel.</li>
+                  <li>Close hooks: overlay click and close button both reverse the timeline.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Panel offset:
+                    <pre><code>fromTo(panel, { y: 20 }, { y: 0, autoAlpha: 1 })</code></pre>
+                  </li>
+                  <li>Ease/duration:
+                    <pre><code>const tl = gsap.timeline({ defaults:{ duration: 0.25, ease: "power3.out" }});</code></pre>
+                  </li>
+                  <li>Dim strength:
+                    <pre><code>.modal__overlay { background: rgba(0,0,0,0.35); }</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="micro">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 6</p>
+        <h2 class="panel__title">Button Microinteraction</h2>
+        <p class="panel__body">Press/release timeline adds tactile depth and ripple highlight.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <button class="button button--micro" id="microBtn">
+              <span class="button__ripple"></span>
+              Deploy
+            </button>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const tl = gsap.timeline({ paused:true, defaults:{ ease: Motion.ease.out }});
+tl.to(btn,{ y:1, scale:0.97, duration: Motion.duration.xs})
+  .to(ripple,{ autoAlpha:0.4, scale:1.2, duration: Motion.duration.sm},0)
+  .to(btn,{ y:0, scale:1, duration: Motion.duration.xs})
+  .to(ripple,{ autoAlpha:0, scale:1.6, duration: Motion.duration.sm * 1.2},"&lt;");
+btn.addEventListener("pointerdown", () =&gt; tl.restart());</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Markup: button with a nested <code>.button__ripple</code> span.</li>
+                  <li>Init: import <code>initMicro</code> and call after DOM ready.</li>
+                  <li>Trigger: timeline restarts on <code>pointerdown</code>; swap to click if preferred.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Ripple:
+                    <pre><code>to(ripple, { autoAlpha: 0.6, scale: 1.4 })</code></pre>
+                  </li>
+                  <li>Button travel:
+                    <pre><code>to(btn, { y: 2, scale: 0.95, duration: Motion.duration.xs })</code></pre>
+                  </li>
+                  <li>Timing:
+                    <pre><code>const tl = gsap.timeline({ defaults:{ duration: 0.08 }});</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel--alt" id="loader">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 7</p>
+        <h2 class="panel__title">Progress Loader</h2>
+        <p class="panel__body">Looping loader timeline with reversible completion state.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <div class="loader">
+              <div class="loader__track">
+                <div class="loader__bar" aria-hidden="true"></div>
+              </div>
+              <div class="loader__label">Loading</div>
+            </div>
+            <div class="controls">
+              <button data-loader="play" class="button button--pill">Play</button>
+              <button data-loader="complete" class="button button--ghost">Complete</button>
+              <button data-loader="reset" class="button button--ghost">Reset</button>
+            </div>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const loopTl = gsap.timeline({ repeat:-1, paused:true, defaults:{ ease:"none" }})
+  .fromTo(bar, { xPercent:-100, width:"35%" }, { xPercent:430, duration:1.8 });
+
+const play = () =&gt; { label.textContent = "Loading"; gsap.set(bar,{ width:"35%", xPercent:-100 }); loopTl.restart(); };
+const complete = () =&gt; { loopTl.pause(0); gsap.to(bar,{ xPercent:0, width:"100%", duration: Motion.duration.md, ease: Motion.ease.out }); label.textContent = "Complete"; };
+const reset = () =&gt; { loopTl.pause(0); gsap.set(bar,{ xPercent:-100, width:"35%" }); label.textContent = "Loading"; };</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Markup: keep the <code>.loader__track</code> and <code>.loader__bar</code> structure.</li>
+                  <li>Init: import <code>initLoader</code> and call after DOM ready.</li>
+                  <li>Control: wire your own events to <code>play</code>/<code>complete</code>/<code>reset</code> functions or reuse the sample buttons.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Bar travel:
+                    <pre><code>fromTo(bar, { xPercent:-100, width:"45%" }, { xPercent: 500, duration: 2 })</code></pre>
+                  </li>
+                  <li>Speed:
+                    <pre><code>const loopTl = gsap.timeline({ defaults:{ ease:"none" }})
+  .fromTo(bar, {...}, { duration: 1.2 });</code></pre>
+                  </li>
+                  <li>Visuals:
+                    <pre><code>.loader__bar { background: linear-gradient(90deg, #7ad7ff, #f2a3ff); height: 12px; }</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="toast">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 8</p>
+        <h2 class="panel__title">Toast Notification Stack</h2>
+        <p class="panel__body">Trigger a toast that slides in, auto-closes, and keeps the stack tidy.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <button id="toastTrigger" class="button button--pill">Show toast</button>
+            <div class="toast-stack" aria-live="polite"></div>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const stack = document.querySelector(".toast-stack");
+const addToast = () =&gt; {
+  const toast = document.createElement("div");
+  toast.className = "toast";
+  toast.innerHTML = "&lt;span class='toast__title'&gt;Saved&lt;/span&gt;&lt;span class='toast__desc'&gt;Your changes are live.&lt;/span&gt;";
+  stack.prepend(toast);
+  gsap.fromTo(toast, { y: 10, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: Motion.duration.sm });
+  gsap.delayedCall(2.6, () =&gt; gsap.to(toast, { y: -10, autoAlpha: 0, duration: Motion.duration.sm, onComplete: () =&gt; toast.remove() }));
+};</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Add a button with <code>id="toastTrigger"</code> and a <code>.toast-stack</code> container.</li>
+                  <li>Import <code>initToast</code> (via <code>ui.js</code>) and call after DOM ready.</li>
+                  <li>Clicking the trigger adds a toast; click a toast to dismiss early.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Auto-close delay:
+                    <pre><code>setTimeout(() =&gt; hideToast(toast), 2600);</code></pre>
+                  </li>
+                  <li>Stack size:
+                    <pre><code>if (stack.childElementCount &gt; 3) { ... }</code></pre>
+                  </li>
+                  <li>Entry distance:
+                    <pre><code>gsap.fromTo(toast, { y: 10 }, { y: 0 })</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel--alt" id="tabs">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 9</p>
+        <h2 class="panel__title">Tabbed Content Slide</h2>
+        <p class="panel__body">Tabs swap content with an underline glide and a quick fade/slide.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <div class="tabs">
+              <div class="tabs__list" role="tablist">
+                <button class="tabs__tab is-active" data-tab="design" role="tab" aria-selected="true">Design</button>
+                <button class="tabs__tab" data-tab="motion" role="tab" aria-selected="false">Motion</button>
+                <button class="tabs__tab" data-tab="handoff" role="tab" aria-selected="false">Handoff</button>
+                <span class="tabs__underline" aria-hidden="true"></span>
+              </div>
+              <div class="tabs__panels">
+                <div class="tabs__panel is-active" data-panel="design" role="tabpanel">
+                  <h4>Design tokens</h4>
+                  <p>Use consistent spacing, radius, and shadows across patterns.</p>
+                </div>
+                <div class="tabs__panel" data-panel="motion" role="tabpanel">
+                  <h4>Motion</h4>
+                  <p>Transforms + opacity only; timelines stay reversible.</p>
+                </div>
+                <div class="tabs__panel" data-panel="handoff" role="tabpanel">
+                  <h4>Handoff</h4>
+                  <p>Each pattern is a module with a single init function.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const tabs = gsap.utils.toArray(".tabs__tab");
+const panels = gsap.utils.toArray(".tabs__panel");
+const underline = document.querySelector(".tabs__underline");
+const activate = (name) =&gt; {
+  const tab = tabs.find((t) =&gt; t.dataset.tab === name);
+  const panel = panels.find((p) =&gt; p.dataset.panel === name);
+  tabs.forEach((t) =&gt; t.classList.toggle("is-active", t === tab));
+  panels.forEach((p) =&gt; p.classList.toggle("is-active", p === panel));
+  gsap.to(underline, { x: tab.offsetLeft, width: tab.offsetWidth, duration: Motion.duration.sm });
+  gsap.fromTo(panel, { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: Motion.duration.sm });
+};</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Keep <code>.tabs__tab</code> buttons with matching <code>data-tab</code> and <code>data-panel</code> values.</li>
+                  <li>Import <code>initTabs</code> (via <code>ui.js</code>) and call after DOM ready.</li>
+                  <li>Underline slides to the active tab; panels fade/slide into place.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Underline speed:
+                    <pre><code>gsap.to(underline, { duration: Motion.duration.sm })</code></pre>
+                  </li>
+                  <li>Panel motion:
+                    <pre><code>gsap.fromTo(panel, { y: 8 }, { y: 0 })</code></pre>
+                  </li>
+                  <li>Tab count:
+                    <pre><code>grid-template-columns: repeat(3, 1fr);</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="switch">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 10</p>
+        <h2 class="panel__title">Toggle Switch Snap</h2>
+        <p class="panel__body">A pill switch that snaps the thumb with a quick bounce and updates the label.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <button class="switch" type="button" aria-pressed="false">
+              <span class="switch__label">Off</span>
+              <span class="switch__thumb"></span>
+            </button>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const toggle = () =&gt; {
+  const isOn = switchEl.classList.toggle("is-on");
+  switchEl.setAttribute("aria-pressed", isOn);
+  label.textContent = isOn ? "On" : "Off";
+  gsap.to(thumb, { x: isOn ? 24 : 0, scale: 1.05, duration: Motion.duration.sm, ease: "back.out(1.6)" });
+};</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Use a <code>.switch</code> button with <code>.switch__thumb</code> and <code>.switch__label</code>.</li>
+                  <li>Import <code>initSwitch</code> (via <code>ui.js</code>) and call after DOM ready.</li>
+                  <li>Click toggles state, updates label, and animates the thumb.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Bounce feel:
+                    <pre><code>ease: "back.out(1.6)"</code></pre>
+                  </li>
+                  <li>Thumb size:
+                    <pre><code>.switch__thumb { width: 26px; height: 26px; }</code></pre>
+                  </li>
+                  <li>Label text:
+                    <pre><code>label.textContent = isOn ? "On" : "Off";</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel--alt" id="tooltip">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 11</p>
+        <h2 class="panel__title">Tooltip Rise</h2>
+        <p class="panel__body">Hover or focus shows a floating tooltip that rises and fades in.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <button class="button button--ghost tooltip-target" aria-describedby="tip-demo">
+              Hover for details
+              <span class="tooltip" role="tooltip" id="tip-demo">This tooltip uses transform + opacity only.</span>
+            </button>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const show = () =&gt; gsap.to(tip, { autoAlpha: 1, y: -6, duration: Motion.duration.sm });
+const hide = () =&gt; gsap.to(tip, { autoAlpha: 0, y: -2, duration: Motion.duration.sm });
+target.addEventListener("pointerenter", show);
+target.addEventListener("pointerleave", hide);
+target.addEventListener("focus", show);
+target.addEventListener("blur", hide);</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Wrap your trigger with <code>.tooltip-target</code> and include a <code>.tooltip</code> element.</li>
+                  <li>Import <code>initTooltips</code> (via <code>ui.js</code>) and call after DOM ready.</li>
+                  <li>Tooltip rises on hover/focus; fades out on leave/blur.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Lift distance:
+                    <pre><code>gsap.to(tip, { y: -6 })</code></pre>
+                  </li>
+                  <li>Fade speed:
+                    <pre><code>duration: Motion.duration.sm</code></pre>
+                  </li>
+                  <li>Position:
+                    <pre><code>.tooltip { top: -10px; }</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="fab">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 12</p>
+        <h2 class="panel__title">FAB Fan Menu</h2>
+        <p class="panel__body">A floating action button fans out quick actions, reversible with a tap.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <div class="fab">
+              <button class="fab__main" aria-expanded="false">+</button>
+              <div class="fab__actions">
+                <button class="fab__action" aria-label="Share">↗</button>
+                <button class="fab__action" aria-label="Star">★</button>
+                <button class="fab__action" aria-label="Download">⇩</button>
+              </div>
+            </div>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const tl = gsap.timeline({ paused:true, defaults:{ duration: Motion.duration.sm, ease: Motion.ease.out }});
+tl.to(actions, { autoAlpha:1, pointerEvents:"auto", duration:0 })
+  .to(btns, { y: (i) =&gt; -56 - i * 10, autoAlpha:1, stagger: 0.05 }, 0);
+main.addEventListener("click", () =&gt; tl.reversed() || tl.progress() === 0 ? tl.play() : tl.reverse());</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Use the provided <code>.fab</code> markup with main + actions.</li>
+                  <li>Import <code>initFab</code> (via <code>ui.js</code>) and call after DOM ready.</li>
+                  <li>Tap toggles the fan; actions fade/slide upward.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Fan radius:
+                    <pre><code>const radius = 128;</code></pre>
+                  </li>
+                  <li>Arc spread:
+                    <pre><code>const baseAngle = -115; const step = -32;</code></pre>
+                  </li>
+                  <li>Action size:
+                    <pre><code>.fab__action { width: 46px; height: 46px; }</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel--alt" id="search">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 13</p>
+        <h2 class="panel__title">Search Field Focus</h2>
+        <p class="panel__body">A focused input with a glow underline and a clear button that fades in.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <div class="search">
+              <span class="search__icon" aria-hidden="true">⌕</span>
+              <input class="search__input" type="text" placeholder="Search patterns" aria-label="Search patterns" />
+              <button class="search__clear" type="button" aria-label="Clear search">×</button>
+              <span class="search__underline" aria-hidden="true"></span>
+            </div>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const input = document.querySelector(".search__input");
+const clear = document.querySelector(".search__clear");
+const underline = document.querySelector(".search__underline");
+const focus = () =&gt; gsap.to(underline, { scaleX: 1, autoAlpha: 1, duration: Motion.duration.sm });
+const blur = () =&gt; gsap.to(underline, { scaleX: 0.4, autoAlpha: 0.6, duration: Motion.duration.sm });
+input.addEventListener("focus", focus);
+input.addEventListener("blur", blur);
+clear.addEventListener("click", () =&gt; { input.value = ""; input.focus(); });</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Wrap input with <code>.search</code>, include underline + clear button.</li>
+                  <li>Import <code>initSearch</code> (via <code>ui.js</code>) and call after DOM ready.</li>
+                  <li>Focus animates the underline; clear resets the field.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Underline strength:
+                    <pre><code>transform: scaleX(0.4); opacity: 0.6;</code></pre>
+                  </li>
+                  <li>Clear reveal:
+                    <pre><code>gsap.to(clear, { autoAlpha: 1 })</code></pre>
+                  </li>
+                  <li>Field width:
+                    <pre><code>.search { max-width: 420px; }</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="bell">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 14</p>
+        <h2 class="panel__title">Notification Bell Ping</h2>
+        <p class="panel__body">Tap the bell to shake and ping the badge with a soft pulse.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <button class="bell" type="button" aria-label="Notifications">
+              <span class="bell__icon">🔔</span>
+              <span class="bell__badge" aria-hidden="true">3</span>
+            </button>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const bell = document.querySelector(".bell");
+const badge = document.querySelector(".bell__badge");
+bell.addEventListener("click", () =&gt; {
+  gsap.fromTo(bell, { rotate: -8 }, { rotate: 0, duration: Motion.duration.sm, ease: "elastic.out(1, 0.4)" });
+  gsap.fromTo(badge, { scale: 1 }, { scale: 1.25, yoyo: true, repeat: 1, duration: Motion.duration.xs });
+});</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Use a <code>.bell</code> button with an icon and badge.</li>
+                  <li>Import <code>initBell</code> (via <code>ui.js</code>) and call after DOM ready.</li>
+                  <li>Click toggles the shake and badge pulse.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Shake feel:
+                    <pre><code>ease: "elastic.out(1, 0.4)"</code></pre>
+                  </li>
+                  <li>Pulse size:
+                    <pre><code>gsap.fromTo(badge, { scale: 1 }, { scale: 1.25 })</code></pre>
+                  </li>
+                  <li>Badge position:
+                    <pre><code>.bell__badge { top: -6px; right: -6px; }</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button class="back-to-top" type="button" aria-label="Back to top">
+    ↑ Top
+  </button>
+  <script type="module" src="./ui.js"></script>
+</body>
+</html>

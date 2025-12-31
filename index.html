@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSAP Text Animation Lab</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="page">
+    <header class="page__header page__header--hero">
+      <div class="hero-shell">
+        <div class="hero-copy">
+          <div class="eyebrow hero-eyebrow">GSAP Text Lab</div>
+          <h1 class="page__title">GSAP Text Animation Playground</h1>
+          <p class="page__lede hero__lede">
+            Learn GSAP text effects step by step. Press play to see each effect, then copy the short code snippets below the demos.
+            Every example is reversible, beginner-friendly, and safe to drop into a project.
+          </p>
+          <div class="hero-badges">
+            <span class="hero-badge">Beginner friendly</span>
+            <span class="hero-badge">Copy-paste examples</span>
+            <span class="hero-badge">Respects reduced motion</span>
+          </div>
+          <div class="hero-actions">
+            <a class="cta cta--primary" href="#chars">Jump to the first demo</a>
+            <a class="cta cta--ghost" href="./ui-animations.html">Go to UI motion patterns page</a>
+          </div>
+          <div class="hero-meta">
+            <div class="meta-block">
+              <p class="meta-label">Demos</p>
+              <p class="meta-value">14</p>
+              <p class="meta-desc">Characters, words, highlights</p>
+            </div>
+            <div class="meta-block">
+              <p class="meta-label">Safe defaults</p>
+              <p class="meta-value">Transforms</p>
+              <p class="meta-desc">No layout shifts</p>
+            </div>
+            <div class="meta-block">
+              <p class="meta-label">Controls</p>
+              <p class="meta-value">Play / Reverse</p>
+              <p class="meta-desc">Buttons included</p>
+            </div>
+          </div>
+          <div class="top-nav top-nav--hero">
+            <a class="nav-link active" href="./index.html" aria-current="page">Text animations (current)</a>
+            <a class="nav-link" href="./ui-animations.html">UI motion patterns</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card__header">
+            <span class="hero-chip">GSAP ready</span>
+            <span class="hero-chip hero-chip--ghost">No build needed</span>
+            <span class="hero-chip hero-chip--accent">Scroll + click</span>
+          </div>
+          <div class="hero-card__body">
+            <ul class="hero-card__list">
+              <li class="hero-card__item">
+                <span class="hero-card__icon" aria-hidden="true">✓</span>
+                <div class="hero-card__copy">
+                  <p class="hero-card__title">Setup</p>
+                  <p class="hero-card__desc">Import GSAP and the section file.</p>
+                </div>
+              </li>
+              <li class="hero-card__item">
+                <span class="hero-card__icon" aria-hidden="true">✓</span>
+                <div class="hero-card__copy">
+                  <p class="hero-card__title">Smooth by default</p>
+                  <p class="hero-card__desc">Uses transforms + opacity only.</p>
+                </div>
+              </li>
+              <li class="hero-card__item">
+                <span class="hero-card__icon" aria-hidden="true">✓</span>
+                <div class="hero-card__copy">
+                  <p class="hero-card__title">Controls included</p>
+                  <p class="hero-card__desc">Play/Reverse buttons are wired up.</p>
+                </div>
+              </li>
+            </ul>
+            <pre class="hero-card__code"><code>// Play animation across split characters
+const tl = gsap.timeline({ defaults: { duration: 0.35, ease: "power2.out" }});
+tl.fromTo(".split span",
+  { yPercent: 120, autoAlpha: 0 },
+  { yPercent: 0, autoAlpha: 1, stagger: 0.04 }
+);</code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="page__notice">
+        <div class="info-card">
+          <details class="setup-box">
+            <summary>Setup notes</summary>
+            <div class="setup-box__content">
+              <h4 class="setup-heading">CDN & imports</h4>
+              <ul>
+                <li>ES module CDN (Skypack) in <code>js/gsapSetup.js</code>; serve over HTTP(s).</li>
+                <li>Explicit plugin registration kept in one place.</li>
+              </ul>
+              <h4 class="setup-heading">Modules & structure</h4>
+              <ul>
+                <li>Scripts use <code>type="module"</code>; animations are split into per-technique modules.</li>
+                <li>Controls on this page are demo-only—wire timelines to your own triggers in production.</li>
+              </ul>
+              <h4 class="setup-heading">Motion defaults</h4>
+              <ul>
+                <li>Transforms/opacity only; <code>prefers-reduced-motion</code> handled via <code>gsap.matchMedia()</code>.</li>
+              </ul>
+              <h4 class="setup-heading">CDN options</h4>
+              <pre><code>// Skypack (used)
+import { gsap } from "https://cdn.skypack.dev/gsap@3.12.5";
+import { ScrollTrigger } from "https://cdn.skypack.dev/gsap@3.12.5/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
+// jsDelivr (alternative)
+import { gsap } from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js";
+import { ScrollTrigger } from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js";
+gsap.registerPlugin(ScrollTrigger);</code></pre>
+            </div>
+          </details>
+        </div>
+      </div>
+    </header>
+
+    <section id="chars" class="panel panel--alt">
+      <div class="panel__inner">
+        <p class="eyebrow">Technique 1</p>
+        <h2 class="panel__title">Character Split Stagger</h2>
+        <p class="panel__body">Manual split into characters; staggered entrance with transform-only motion for reversibility.</p>
+        <div class="demo">
+          <div class="demo__text split" data-anim="chars">Craft responsive motion systems.</div>
+        </div>
+        <div class="controls">
+          <button data-action="play">Play</button>
+          <button data-action="reverse">Reverse</button>
+          <button data-action="restart">Restart</button>
+        </div>
+        <div class="meta">
+          <div class="prompt-box">
+            <p class="prompt-box__title">Codex Prompt</p>
+            <p>Build a GSAP character split stagger: manually split the headline into chars and animate them in with transform-only y/opacity.</p>
+          </div>
+          <details class="code-box">
+            <summary>View JS for this animation</summary>
+            <pre><code>import { gsap, Motion } from "../gsapSetup.js";
+import { splitByChars } from "../utils/text.js";
+
+// Character stagger demonstrating reversible timeline-as-state-machine.
+function initSectionChars(section, isReduced) {
+  const textEl = section.querySelector("[data-anim='chars']");
+  const controls = section.querySelectorAll(".controls button");
+  if (!textEl) return () =&gt; {};
+
+  const chars = splitByChars(textEl);
+  const duration = isReduced ? 0.01 : Motion.duration.md;
+
+  gsap.set(chars, { yPercent: 120, autoAlpha: 0 });
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { ease: Motion.ease.out, duration }
+  });
+
+  tl.fromTo(
+    chars,
+    { yPercent: 120, autoAlpha: 0 },
+    { yPercent: 0, autoAlpha: 1, stagger: 0.04 }
+  );
+
+  const handlers = {
+    play: () =&gt; tl.play(),
+    reverse: () =&gt; tl.reverse(),
+    restart: () =&gt; tl.restart()
+  };
+
+  controls.forEach((btn) =&gt; {
+    const action = btn.dataset.action;
+    const fn = handlers[action];
+    if (fn) btn.addEventListener("click", fn);
+  });
+
+  if (isReduced) {
+    tl.progress(1).pause(0);
+  }
+
+  return () =&gt; {
+    controls.forEach((btn) =&gt; {
+      const action = btn.dataset.action;
+      const fn = handlers[action];
+      if (fn) btn.removeEventListener("click", fn);
+    });
+    tl.kill();
+    gsap.set(chars, { clearProps: "all" });
+  };
+}
+
+export { initSectionChars };</code></pre>
+          </details>
+          <details class="code-box">
+            <summary>How to apply this effect</summary>
+            <div class="code-box__body">
+              <ol>
+                <li>Markup: <code>&lt;h2 class="my-headline"&gt;Your text here&lt;/h2&gt;</code></li>
+                <li>JS (module): <code>import { initSectionChars } from "./js/sections/sectionChars.js"; import "./js/gsapSetup.js";</code></li>
+                <li>Init after DOM ready: <code>initSectionChars(document.querySelector(".my-section"), false);</code> (pass your section or container)</li>
+                <li>Wire your own trigger: call the returned timeline’s <code>play()</code>/<code>reverse()</code> from your UI.</li>
+              </ol>
+            </div>
+          </details>
+          <details class="code-box">
+          <summary>What to tweak</summary>
+          <div class="code-box__body">
+            <ul>
+              <li>Stagger rhythm:
+                <pre><code>tl.fromTo(chars, {...}, { stagger: 0.04 });</code></pre>
+              </li>
+              <li>Lift distance:
+                <pre><code>gsap.set(chars, { yPercent: 120 });</code></pre>
+              </li>
+              <li>Speed:
+                <pre><code>const duration = Motion.duration.sm; // or md/lg</code></pre>
+              </li>
+              <li>Custom splits:
+                <pre><code>const chars = Array.from(textEl.querySelectorAll("span")); // if pre-wrapped</code></pre>
+              </li>
+            </ul>
+          </div>
+        </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="words" class="panel">
+      <div class="panel__inner">
+        <p class="eyebrow">Technique 2</p>
+        <h2 class="panel__title">Word Split with Drift</h2>
+        <p class="panel__body">Words drift upward with light rotation; avoids layout properties to keep repaint cost low.</p>
+        <div class="demo">
+          <div class="demo__text split" data-anim="words">Text systems thrive on consistent easing.</div>
+        </div>
+        <div class="controls">
+          <button data-action="play">Play</button>
+          <button data-action="reverse">Reverse</button>
+          <button data-action="restart">Restart</button>
+        </div>
+        <div class="meta">
+          <div class="prompt-box">
+            <p class="prompt-box__title">Codex Prompt</p>
+            <p>Create a word-split drift: split the text into words and animate each upward with light rotation and opacity using transform-only properties.</p>
+          </div>
+          <details class="code-box">
+            <summary>View JS for this animation</summary>
+            <pre><code>import { gsap, Motion } from "../gsapSetup.js";
+import { splitByWords } from "../utils/text.js";
+
+// Word-level drift with slight rotation to emulate blur without costly filters.
+function initSectionWords(section, isReduced) {
+  const textEl = section.querySelector("[data-anim='words']");
+  const controls = section.querySelectorAll(".controls button");
+  if (!textEl) return () =&gt; {};
+
+  const words = splitByWords(textEl);
+  const duration = isReduced ? 0.01 : Motion.duration.md;
+
+  gsap.set(words, { yPercent: 60, rotate: -6, autoAlpha: 0 });
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { ease: Motion.ease.out, duration }
+  });
+
+  tl.fromTo(words, {
+    yPercent: 60,
+    rotate: -6,
+    autoAlpha: 0
+  }, {
+    yPercent: 0,
+    rotate: 0,
+    autoAlpha: 1,
+    stagger: 0.08
+  });
+
+  const handlers = {
+    play: () =&gt; tl.play(),
+    reverse: () =&gt; tl.reverse(),
+    restart: () =&gt; tl.restart()
+  };
+
+  controls.forEach((btn) =&gt; {
+    const fn = handlers[btn.dataset.action];
+    if (fn) btn.addEventListener("click", fn);
+  });
+
+  if (isReduced) tl.progress(1).pause(0);
+
+  return () =&gt; {
+    controls.forEach((btn) =&gt; {
+      const fn = handlers[btn.dataset.action];
+      if (fn) btn.removeEventListener("click", fn);
+    });
+    tl.kill();
+    gsap.set(words, { clearProps: "all" });
+  };
+}
+
+export { initSectionWords };</code></pre>
+          </details>
+          <details class="code-box">
+            <summary>How to apply this effect</summary>
+            <div class="code-box__body">
+              <ol>
+                <li>Markup: <code>&lt;p class="my-words"&gt;Your text here&lt;/p&gt;</code></li>
+                <li>JS (module): <code>import { initSectionWords } from "./js/sections/sectionWords.js"; import "./js/gsapSetup.js";</code></li>
+                <li>Init after DOM ready: <code>initSectionWords(document.querySelector(".my-section"), false);</code></li>
+                <li>Call the timeline’s controls from your own triggers to replay the drift when needed.</li>
+              </ol>
+            </div>
+          </details>
+          <details class="code-box">
+          <summary>What to tweak</summary>
+          <div class="code-box__body">
+            <ul>
+              <li>Tilt amount:
+                <pre><code>gsap.set(words, { rotate: -6 });</code></pre>
+              </li>
+              <li>Stagger cadence:
+                <pre><code>tl.fromTo(words, {...}, { stagger: 0.08 });</code></pre>
+              </li>
+              <li>Lift distance:
+                <pre><code>gsap.set(words, { yPercent: 60 });</code></pre>
+              </li>
+              <li>Ease:
+                <pre><code>defaults: { ease: Motion.ease.soft }</code></pre>
+              </li>
+            </ul>
+          </div>
+        </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="mask" class="panel panel--alt">
+      <div class="panel__inner">
+        <p class="eyebrow">Technique 3</p>
+        <h2 class="panel__title">Masked Reveal</h2>
+        <p class="panel__body">Overflow-hidden wrapper keeps layout stable while text slides in via transforms.</p>
+        <div class="demo demo--mask">
+          <div class="mask">
+            <div class="mask__inner" data-anim="mask">Measured movement prevents layout thrash.</div>
+          </div>
+        </div>
+        <div class="controls">
+          <button data-action="play">Play</button>
+          <button data-action="reverse">Reverse</button>
+          <button data-action="restart">Restart</button>
+        </div>
+        <div class="meta">
+          <div class="prompt-box">
+            <p class="prompt-box__title">Codex Prompt</p>
+            <p>Implement a masked reveal: wrap the headline in an overflow-hidden container and slide the inner text up via yPercent/autoAlpha.</p>
+          </div>
+          <details class="code-box">
+            <summary>View JS for this animation</summary>
+            <pre><code>import { gsap, Motion } from "../gsapSetup.js";
+
+// Masked reveal using overflow hidden to avoid layout thrash while moving text.
+function initSectionMask(section, isReduced) {
+  const textEl = section.querySelector("[data-anim='mask']");
+  const controls = section.querySelectorAll(".controls button");
+  if (!textEl) return () =&gt; {};
+
+  const duration = isReduced ? 0.01 : Motion.duration.md;
+
+  gsap.set(textEl, { yPercent: 100, autoAlpha: 0 });
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { ease: Motion.ease.out, duration }
+  });
+
+  tl.fromTo(
+    textEl,
+    { yPercent: 100, autoAlpha: 0 },
+    { yPercent: 0, autoAlpha: 1 }
+  );
+
+  const handlers = {
+    play: () =&gt; tl.play(),
+    reverse: () =&gt; tl.reverse(),
+    restart: () =&gt; tl.restart()
+  };
+
+  controls.forEach((btn) =&gt; {
+    const fn = handlers[btn.dataset.action];
+    if (fn) btn.addEventListener("click", fn);
+  });
+
+  if (isReduced) tl.progress(1).pause(0);
+
+  return () =&gt; {
+    controls.forEach((btn) =&gt; {
+      const fn = handlers[btn.dataset.action];
+      if (fn) btn.removeEventListener("click", fn);
+    });
+    tl.kill();
+    gsap.set(textEl, { clearProps: "all" });
+  };
+}
+
+export { initSectionMask };</code></pre>
+          </details>
+          <details class="code-box">
+            <summary>How to apply this effect</summary>
+            <div class="code-box__body">
+              <ol>
+                <li>Markup: <code>&lt;div class="mask"&gt;&lt;div class="mask__inner"&gt;Your text&lt;/div&gt;&lt;/div&gt;</code></li>
+                <li>JS (module): <code>import { initSectionMask } from "./js/sections/sectionMask.js"; import "./js/gsapSetup.js";</code></li>
+                <li>Init after DOM ready: <code>initSectionMask(document.querySelector(".my-section"), false);</code></li>
+                <li>Call the timeline from your own reveal trigger; overflow hidden keeps layout stable.</li>
+              </ol>
+            </div>
+          </details>
+          <details class="code-box">
+            <summary>What to tweak</summary>
+            <div class="code-box__body">
+              <ul>
+                <li>Travel distance:
+                  <pre><code>fromTo(textEl, { yPercent: 100 }, { yPercent: 0 });</code></pre>
+                </li>
+                <li>Speed:
+                  <pre><code>const duration = Motion.duration.sm; // or md/lg</code></pre>
+                </li>
+                <li>Mask safety: keep <code>overflow:hidden</code> on the wrapper to prevent layout shifts.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="scramble" class="panel">
+      <div class="panel__inner">
+        <p class="eyebrow">Technique 4</p>
+        <h2 class="panel__title">Scramble Reveal</h2>
+        <p class="panel__body">Simple scramble built on GSAP's ticker; reversible timeline controls start and finish.</p>
+        <div class="demo">
+          <div class="demo__text" data-anim="scramble" aria-live="polite">Signal-ready strings arrive cleanly.</div>
+        </div>
+        <div class="controls">
+          <button data-action="play">Play</button>
+          <button data-action="reverse">Reverse</button>
+          <button data-action="restart">Restart</button>
+        </div>
+        <div class="meta">
+          <div class="prompt-box">
+            <p class="prompt-box__title">Codex Prompt</p>
+            <p>Write a GSAP-driven scramble reveal that replaces scrambled characters with the final string over time using a ticker-friendly callback.</p>
+          </div>
+          <details class="code-box">
+            <summary>View JS for this animation</summary>
+            <pre><code>import { gsap, Motion } from "../gsapSetup.js";
+
+// Lightweight scramble using timeline-driven progress; no external plugins.
+function initSectionScramble(section, isReduced) {
+  const textEl = section.querySelector("[data-anim='scramble']");
+  const controls = section.querySelectorAll(".controls button");
+  if (!textEl) return () =&gt; {};
+
+  const originalText = textEl.textContent || "";
+  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+  const finalChars = originalText.split("");
+  const state = { progress: 0 };
+  const duration = isReduced ? 0.01 : Motion.duration.lg;
+
+  const render = () =&gt; {
+    const total = finalChars.length;
+    const revealCount = Math.floor(state.progress * total);
+    const chars = finalChars.map((char, idx) =&gt; {
+      if (char === " ") return " ";
+      if (idx &lt; revealCount) return char;
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      return charset[randomIndex];
+    });
+    textEl.textContent = chars.join("");
+  };
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { duration, ease: "none" },
+    onReverseComplete: () =&gt; {
+      textEl.textContent = originalText;
+    }
+  });
+
+  tl.fromTo(
+    state,
+    { progress: 0 },
+    {
+      progress: 1,
+      onUpdate: render,
+      onComplete: () =&gt; {
+        textEl.textContent = originalText;
+      }
+    }
+  );
+
+  const handlers = {
+    play: () =&gt; tl.play(),
+    reverse: () =&gt; tl.reverse(),
+    restart: () =&gt; tl.restart()
+  };
+
+  controls.forEach((btn) =&gt; {
+    const fn = handlers[btn.dataset.action];
+    if (fn) btn.addEventListener("click", fn);
+  });
+
+  if (isReduced) {
+    textEl.textContent = originalText;
+    tl.progress(1).pause(0);
+  }
+
+  return () =&gt; {
+    controls.forEach((btn) =&gt; {
+      const fn = handlers[btn.dataset.action];
+      if (fn) btn.removeEventListener("click", fn);
+    });
+    tl.kill();
+    textEl.textContent = originalText;
+  };
+}
+
+export { initSectionScramble };</code></pre>
+          </details>
+          <details class="code-box">
+            <summary>How to apply this effect</summary>
+            <div class="code-box__body">
+              <ol>
+                <li>Markup: <code>&lt;p class="my-scramble"&gt;Your text here&lt;/p&gt;</code></li>
+                <li>JS (module): <code>import { initSectionScramble } from "./js/sections/sectionScramble.js"; import "./js/gsapSetup.js";</code></li>
+                <li>Init after DOM ready: <code>initSectionScramble(document.querySelector(".my-section"), false);</code></li>
+                <li>Trigger the timeline when you want the scramble-to-reveal to play (e.g., on view or button).</li>
+              </ol>
+            </div>
+          </details>
+          <details class="code-box">
+          <summary>What to tweak</summary>
+          <div class="code-box__body">
+            <ul>
+                <li>Character pool:
+                  <pre><code>const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";</code></pre>
+                </li>
+                <li>Reveal speed:
+                  <pre><code>const duration = Motion.duration.md; // faster than lg</code></pre>
+                </li>
+                <li>Space handling: keep spaces untouched in <code>render()</code> to avoid jitter.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="highlight" class="panel panel--alt">
+      <div class="panel__inner">
+        <p class="eyebrow">Technique 5</p>
+        <h2 class="panel__title">Kinetic Highlight Sweep</h2>
+        <p class="panel__body">A tracked bar sweeps beneath the text while the headline lifts subtly.</p>
+        <div class="demo highlight">
+          <span class="highlight__bar" aria-hidden="true"></span>
+          <span class="highlight__text" data-anim="highlight">Underline motion as emphasis.</span>
+        </div>
+        <div class="controls">
+          <button data-action="play">Play</button>
+          <button data-action="reverse">Reverse</button>
+          <button data-action="restart">Restart</button>
+        </div>
+        <div class="meta">
+          <div class="prompt-box">
+            <p class="prompt-box__title">Codex Prompt</p>
+            <p>Animate a kinetic highlight: sweep a bar under the text while the headline lifts slightly, using transform-only values.</p>
+          </div>
+          <details class="code-box">
+            <summary>View JS for this animation</summary>
+            <pre><code>import { gsap, Motion } from "../gsapSetup.js";
+
+// Highlight sweep uses a separate bar element to keep text untouched and composited.
+function initSectionHighlight(section, isReduced) {
+  const bar = section.querySelector(".highlight__bar");
+  const text = section.querySelector("[data-anim='highlight']");
+  const controls = section.querySelectorAll(".controls button");
+  if (!bar || !text) return () =&gt; {};
+
+  const duration = isReduced ? 0.01 : Motion.duration.md;
+
+  gsap.set(bar, { scaleX: 0, autoAlpha: 0 });
+  gsap.set(text, { yPercent: 20, autoAlpha: 0.7 });
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { ease: Motion.ease.out, duration }
+  });
+
+  tl.fromTo(
+    bar,
+    { scaleX: 0, autoAlpha: 0 },
+    { scaleX: 1, autoAlpha: 0.6 }
+  ).fromTo(
+    text,
+    { yPercent: 20, autoAlpha: 0.7 },
+    { yPercent: 0, autoAlpha: 1 },
+    "&lt;"
+  );
+
+  const handlers = {
+    play: () =&gt; tl.play(),
+    reverse: () =&gt; tl.reverse(),
+    restart: () =&gt; tl.restart()
+  };
+
+  controls.forEach((btn) =&gt; {
+    const fn = handlers[btn.dataset.action];
+    if (fn) btn.addEventListener("click", fn);
+  });
+
+  if (isReduced) tl.progress(1).pause(0);
+
+  return () =&gt; {
+    controls.forEach((btn) =&gt; {
+      const fn = handlers[btn.dataset.action];
+      if (fn) btn.removeEventListener("click", fn);
+    });
+    tl.kill();
+    gsap.set([bar, text], { clearProps: "all" });
+  };
+}
+
+export { initSectionHighlight };</code></pre>
+          </details>
+          <details class="code-box">
+            <summary>How to apply this effect</summary>
+            <div class="code-box__body">
+              <ol>
+                <li>Markup: <code>&lt;div class="highlight"&gt;&lt;span class="highlight__bar"&gt;&lt;/span&gt;&lt;span class="highlight__text"&gt;Text&lt;/span&gt;&lt;/div&gt;</code></li>
+                <li>JS (module): <code>import { initSectionHighlight } from "./js/sections/sectionHighlight.js"; import "./js/gsapSetup.js";</code></li>
+                <li>Init after DOM ready: <code>initSectionHighlight(document.querySelector(".my-section"), false);</code></li>
+                <li>Invoke the timeline when you want the sweep; bar stays separate to keep text crisp.</li>
+              </ol>
+            </div>
+          </details>
+          <details class="code-box">
+          <summary>What to tweak</summary>
+          <div class="code-box__body">
+            <ul>
+                <li>Bar sweep:
+                  <pre><code>fromTo(bar, { scaleX: 0 }, { scaleX: 1, ease: "power2.out" });</code></pre>
+                </li>
+                <li>Text lift:
+                  <pre><code>gsap.set(text, { yPercent: 20 });</code></pre>
+                </li>
+                <li>Emphasis:
+                  <pre><code>{ autoAlpha: 0.6 } // raise/lower bar opacity</code></pre>
+                </li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="perspective" class="panel">
+      <div class="panel__inner">
+        <p class="eyebrow">Technique 6</p>
+        <h2 class="panel__title">3D Perspective Entrance</h2>
+        <p class="panel__body">Light rotateX/Y with perspective creates depth while respecting mobile performance.</p>
+        <div class="demo demo--perspective">
+          <div class="demo__text" data-anim="perspective">Depth without layout cost.</div>
+        </div>
+        <div class="controls">
+          <button data-action="play">Play</button>
+          <button data-action="reverse">Reverse</button>
+          <button data-action="restart">Restart</button>
+        </div>
+        <div class="meta">
+          <div class="prompt-box">
+            <p class="prompt-box__title">Codex Prompt</p>
+            <p>Build a 3D-ish entrance: bring text forward with light rotateX/rotateY and yPercent while keeping it performant.</p>
+          </div>
+          <details class="code-box">
+            <summary>View JS for this animation</summary>
+            <pre><code>import { gsap, Motion } from "../gsapSetup.js";
+
+// Perspective entrance applies subtle rotateX/Y to avoid costly 3D layers.
+function initSectionPerspective(section, isReduced) {
+  const text = section.querySelector("[data-anim='perspective']");
+  const controls = section.querySelectorAll(".controls button");
+  if (!text) return () =&gt; {};
+
+  const duration = isReduced ? 0.01 : Motion.duration.md;
+
+  gsap.set(text, {
+    autoAlpha: 0,
+    rotateX: -40,
+    rotateY: 14,
+    yPercent: 30,
+    transformOrigin: "50% 50%"
+  });
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { ease: Motion.ease.back, duration }
+  });
+
+  tl.to(text, {
+    autoAlpha: 1,
+    rotateX: 0,
+    rotateY: 0,
+    yPercent: 0
+  });
+
+  const handlers = {
+    play: () =&gt; tl.play(),
+    reverse: () =&gt; tl.reverse(),
+    restart: () =&gt; tl.restart()
+  };
+
+  controls.forEach((btn) =&gt; {
+    const fn = handlers[btn.dataset.action];
+    if (fn) btn.addEventListener("click", fn);
+  });
+
+  if (isReduced) tl.progress(1).pause(0);
+
+  return () =&gt; {
+    controls.forEach((btn) =&gt; {
+      const fn = handlers[btn.dataset.action];
+      if (fn) btn.removeEventListener("click", fn);
+    });
+    tl.kill();
+    gsap.set(text, { clearProps: "all" });
+  };
+}
+
+export { initSectionPerspective };</code></pre>
+          </details>
+          <details class="code-box">
+            <summary>How to apply this effect</summary>
+            <div class="code-box__body">
+              <ol>
+                <li>Markup: <code>&lt;h3 class="my-perspective"&gt;Your text&lt;/h3&gt;</code></li>
+                <li>JS (module): <code>import { initSectionPerspective } from "./js/sections/sectionPerspective.js"; import "./js/gsapSetup.js";</code></li>
+                <li>Init after DOM ready: <code>initSectionPerspective(document.querySelector(".my-section"), false);</code></li>
+                <li>Trigger the timeline when you need the depth entrance (e.g., on reveal).</li>
+              </ol>
+            </div>
+          </details>
+          <details class="code-box">
+          <summary>What to tweak</summary>
+          <div class="code-box__body">
+            <ul>
+                <li>Depth:
+                  <pre><code>gsap.set(text, { rotateX: -40, rotateY: 14 });</code></pre>
+                </li>
+                <li>Ease:
+                  <pre><code>defaults: { ease: Motion.ease.back }</code></pre>
+                </li>
+                <li>Lift:
+                  <pre><code>gsap.set(text, { yPercent: 30 });</code></pre>
+                </li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="wave" class="panel panel--alt">
+      <div class="panel__inner">
+        <p class="eyebrow">Technique 7</p>
+        <h2 class="panel__title">Wave Stagger</h2>
+        <p class="panel__body">Function-based stagger creates a ripple across characters with consistent easing.</p>
+        <div class="demo">
+          <div class="demo__text split" data-anim="wave">Organic waves feel procedural.</div>
+        </div>
+        <div class="controls">
+          <button data-action="play">Play</button>
+          <button data-action="reverse">Reverse</button>
+          <button data-action="restart">Restart</button>
+        </div>
+        <div class="meta">
+          <div class="prompt-box">
+            <p class="prompt-box__title">Codex Prompt</p>
+            <p>Make a character-split wave: use function-based stagger to create an organic ripple with transform/opacity only.</p>
+          </div>
+          <details class="code-box">
+            <summary>View JS for this animation</summary>
+            <pre><code>import { gsap, Motion } from "../gsapSetup.js";
+import { splitByChars } from "../utils/text.js";
+
+// Wave stagger uses function-based delays for organic ripple without layout touches.
+function initSectionWave(section, isReduced) {
+  const text = section.querySelector("[data-anim='wave']");
+  const controls = section.querySelectorAll(".controls button");
+  if (!text) return () =&gt; {};
+
+  const chars = splitByChars(text);
+  const duration = isReduced ? 0.01 : Motion.duration.sm;
+
+  gsap.set(chars, { yPercent: 120, autoAlpha: 0, scale: 0.9 });
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { ease: Motion.ease.out, duration }
+  });
+
+  tl.fromTo(
+    chars,
+    { yPercent: 120, autoAlpha: 0, scale: 0.9 },
+    {
+      yPercent: 0,
+      autoAlpha: 1,
+      scale: 1,
+      stagger: (index) =&gt; 0.06 + Math.abs(Math.sin(index * 0.5)) * 0.05
+    }
+  );
+
+  const handlers = {
+    play: () =&gt; tl.play(),
+    reverse: () =&gt; tl.reverse(),
+    restart: () =&gt; tl.restart()
+  };
+
+  controls.forEach((btn) =&gt; {
+    const fn = handlers[btn.dataset.action];
+    if (fn) btn.addEventListener("click", fn);
+  });
+
+  if (isReduced) tl.progress(1).pause(0);
+
+  return () =&gt; {
+    controls.forEach((btn) =&gt; {
+      const fn = handlers[btn.dataset.action];
+      if (fn) btn.removeEventListener("click", fn);
+    });
+    tl.kill();
+    gsap.set(chars, { clearProps: "all" });
+  };
+}
+
+export { initSectionWave };</code></pre>
+          </details>
+          <details class="code-box">
+            <summary>How to apply this effect</summary>
+            <div class="code-box__body">
+              <ol>
+                <li>Markup: <code>&lt;h4 class="my-wave"&gt;Your text&lt;/h4&gt;</code></li>
+                <li>JS (module): <code>import { initSectionWave } from "./js/sections/sectionWave.js"; import "./js/gsapSetup.js";</code></li>
+                <li>Init after DOM ready: <code>initSectionWave(document.querySelector(".my-section"), false);</code></li>
+                <li>Trigger the timeline when you want the ripple to run.</li>
+              </ol>
+            </div>
+          </details>
+          <details class="code-box">
+          <summary>What to tweak</summary>
+          <div class="code-box__body">
+            <ul>
+                <li>Wave function:
+                  <pre><code>stagger: (i) =&gt; 0.06 + Math.abs(Math.sin(i * 0.5)) * 0.05</code></pre>
+                </li>
+                <li>Depth:
+                  <pre><code>gsap.set(chars, { yPercent: 120, scale: 0.9 });</code></pre>
+                </li>
+                <li>Ease:
+                  <pre><code>defaults: { ease: Motion.ease.soft }</code></pre>
+                </li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="counter" class="panel">
+      <div class="panel__inner">
+        <p class="eyebrow">Technique 8</p>
+        <h2 class="panel__title">Rolling Counter</h2>
+        <p class="panel__body">Numeric text ticks upward with snapping and an accessible label.</p>
+        <div class="demo demo--counter">
+          <div class="counter">
+            <span class="counter__label">Downloads</span>
+            <span class="counter__value" data-anim="counter" aria-live="polite">0</span>
+          </div>
+        </div>
+        <div class="controls">
+          <button data-action="play">Play</button>
+          <button data-action="reverse">Reverse</button>
+          <button data-action="restart">Restart</button>
+        </div>
+        <div class="meta">
+          <div class="prompt-box">
+            <p class="prompt-box__title">Codex Prompt</p>
+            <p>Animate a rolling counter: tween numbers upward with snapping while keeping the text accessible.</p>
+          </div>
+          <details class="code-box">
+            <summary>View JS for this animation</summary>
+            <pre><code>import { gsap, Motion } from "../gsapSetup.js";
+
+// Rolling counter keeps text-accessible, using snap to avoid jittery decimals.
+function initSectionCounter(section, isReduced) {
+  const valueEl = section.querySelector("[data-anim='counter']");
+  const controls = section.querySelectorAll(".controls button");
+  if (!valueEl) return () =&gt; {};
+
+  const endValue = 24580;
+  const state = { value: 0 };
+  const duration = isReduced ? 0.01 : Motion.duration.lg;
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { ease: Motion.ease.out }
+  });
+
+  tl.to(state, {
+    value: endValue,
+    duration,
+    snap: { value: 1 },
+    onUpdate: () =&gt; {
+      valueEl.textContent = Math.round(state.value).toLocaleString();
+    },
+    onComplete: () =&gt; {
+      valueEl.textContent = endValue.toLocaleString();
+    }
+  });
+
+  const handlers = {
+    play: () =&gt; tl.play(),
+    reverse: () =&gt; tl.reverse(),
+    restart: () =&gt; tl.restart()
+  };
+
+  controls.forEach((btn) =&gt; {
+    const fn = handlers[btn.dataset.action];
+    if (fn) btn.addEventListener("click", fn);
+  });
+
+  if (isReduced) {
+    state.value = endValue;
+    valueEl.textContent = endValue.toLocaleString();
+    tl.progress(1).pause(0);
+  }
+
+  return () =&gt; {
+    controls.forEach((btn) =&gt; {
+      const fn = handlers[btn.dataset.action];
+      if (fn) btn.removeEventListener("click", fn);
+    });
+    tl.kill();
+    valueEl.textContent = "0";
+  };
+}
+
+export { initSectionCounter };</code></pre>
+          </details>
+          <details class="code-box">
+            <summary>How to apply this effect</summary>
+            <div class="code-box__body">
+              <ol>
+                <li>Markup: <code>&lt;span class="stat-value"&gt;0&lt;/span&gt;</code></li>
+                <li>JS (module): <code>import { initSectionCounter } from "./js/sections/sectionCounter.js"; import "./js/gsapSetup.js";</code></li>
+                <li>Init after DOM ready: <code>initSectionCounter(document.querySelector(".my-section"), false);</code> (set your own <code>endValue</code> in the module)</li>
+                <li>Trigger the timeline when the stat should roll up (e.g., when data loads).</li>
+              </ol>
+            </div>
+          </details>
+          <details class="code-box">
+          <summary>What to tweak</summary>
+          <div class="code-box__body">
+            <ul>
+                <li>Final number:
+                  <pre><code>const endValue = 24580;</code></pre>
+                </li>
+                <li>Snap:
+                  <pre><code>snap: { value: 1 } // use 0.1 for decimals</code></pre>
+                </li>
+                <li>Speed:
+                  <pre><code>duration: Motion.duration.md</code></pre>
+                </li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="flip" class="panel panel--alt">
+      <div class="panel__inner">
+        <p class="eyebrow">Technique 9</p>
+        <h2 class="panel__title">3D Flip Cascade</h2>
+        <p class="panel__body">Characters flip up on the Y axis with staggered depth—fast, transform-only entrance.</p>
+        <div class="demo">
+          <div class="demo__text split" data-anim="flip">Flip each character with ease.</div>
+        </div>
+        <div class="controls">
+          <button data-action="play">Play</button>
+          <button data-action="reverse">Reverse</button>
+          <button data-action="restart">Restart</button>
+        </div>
+        <div class="meta">
+          <div class="prompt-box">
+            <p class="prompt-box__title">Codex Prompt</p>
+            <p>Create a character flip cascade: split text into chars and flip each in on rotateY with a stagger, using transform-only values.</p>
+          </div>
+          <details class="code-box">
+            <summary>View JS for this animation</summary>
+            <pre><code>import { gsap, Motion } from "../gsapSetup.js";
+import { splitByChars } from "../utils/text.js";
+
+// Flip cascade for characters with staggered rotateY.
+function initSectionFlip(section, isReduced) {
+  const text = section.querySelector("[data-anim='flip']");
+  const controls = section.querySelectorAll(".controls button");
+  if (!text) return () =&gt; {};
+
+  const chars = splitByChars(text);
+  const duration = isReduced ? 0.01 : Motion.duration.sm;
+
+  gsap.set(chars, { rotateY: -90, yPercent: 40, autoAlpha: 0, transformOrigin: "50% 50%" });
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { ease: Motion.ease.out, duration }
+  });
+
+  tl.to(chars, {
+    rotateY: 0,
+    yPercent: 0,
+    autoAlpha: 1,
+    stagger: 0.05
+  });
+
+  const handlers = { play: () =&gt; tl.play(), reverse: () =&gt; tl.reverse(), restart: () =&gt; tl.restart() };
+  controls.forEach((btn) =&gt; {
+    const fn = handlers[btn.dataset.action];
+    if (fn) btn.addEventListener("click", fn);
+  });
+
+  if (isReduced) tl.progress(1).pause(0);
+
+  return () =&gt; {
+    controls.forEach((btn) =&gt; {
+      const fn = handlers[btn.dataset.action];
+      if (fn) btn.removeEventListener("click", fn);
+    });
+    tl.kill();
+    gsap.set(chars, { clearProps: "all" });
+  };
+}
+
+export { initSectionFlip };</code></pre>
+          </details>
+          <details class="code-box">
+            <summary>How to apply this effect</summary>
+            <div class="code-box__body">
+              <ol>
+                <li>Markup: <code>&lt;h3 class="my-flip"&gt;Your text&lt;/h3&gt;</code></li>
+                <li>JS (module): <code>import { initSectionFlip } from "./js/sections/sectionFlip.js"; import "./js/gsapSetup.js";</code></li>
+                <li>Init after DOM ready: <code>initSectionFlip(document.querySelector(".my-section"), false);</code></li>
+                <li>Trigger the timeline when you want the flip cascade to play.</li>
+              </ol>
+            </div>
+          </details>
+          <details class="code-box">
+          <summary>What to tweak</summary>
+          <div class="code-box__body">
+            <ul>
+                <li>Flip depth:
+                  <pre><code>gsap.set(chars, { rotateY: -90 });</code></pre>
+                </li>
+                <li>Cadence:
+                  <pre><code>to(chars, { stagger: 0.05 })</code></pre>
+                </li>
+                <li>Ease:
+                  <pre><code>defaults: { ease: Motion.ease.back }</code></pre>
+                </li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="duotone" class="panel">
+      <div class="panel__inner">
+        <p class="eyebrow">Technique 10</p>
+        <h2 class="panel__title">Duotone Slide</h2>
+        <p class="panel__body">Foreground text lifts while a ghost layer slides in offset for a duotone accent.</p>
+        <div class="demo demo--duotone">
+          <div class="duotone">
+            <span class="duotone__ghost" aria-hidden="true">Duotone motion layers.</span>
+            <span class="duotone__main" data-anim="duotone">Duotone motion layers.</span>
+          </div>
+        </div>
+        <div class="controls">
+          <button data-action="play">Play</button>
+          <button data-action="reverse">Reverse</button>
+          <button data-action="restart">Restart</button>
+        </div>
+        <div class="meta">
+          <div class="prompt-box">
+            <p class="prompt-box__title">Codex Prompt</p>
+            <p>Animate a duotone text pair: slide in a ghost layer with offset/opacity while the main text lifts slightly using transform/opacity only.</p>
+          </div>
+          <details class="code-box">
+            <summary>View JS for this animation</summary>
+            <pre><code>import { gsap, Motion } from "../gsapSetup.js";
+
+// Duotone slide with ghost layer offset.
+function initSectionDuotone(section, isReduced) {
+  const main = section.querySelector("[data-anim='duotone']");
+  const ghost = section.querySelector(".duotone__ghost");
+  const controls = section.querySelectorAll(".controls button");
+  if (!main || !ghost) return () =&gt; {};
+
+  const duration = isReduced ? 0.01 : Motion.duration.md;
+
+  gsap.set(main, { yPercent: 18, autoAlpha: 0.9 });
+  gsap.set(ghost, { xPercent: -20, yPercent: 30, autoAlpha: 0 });
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { ease: Motion.ease.out, duration }
+  });
+
+  tl.to(ghost, { xPercent: 0, yPercent: 0, autoAlpha: 0.5 })
+    .to(main, { yPercent: 0, autoAlpha: 1 }, 0);
+
+  const handlers = { play: () =&gt; tl.play(), reverse: () =&gt; tl.reverse(), restart: () =&gt; tl.restart() };
+  controls.forEach((btn) =&gt; {
+    const fn = handlers[btn.dataset.action];
+    if (fn) btn.addEventListener("click", fn);
+  });
+
+  if (isReduced) tl.progress(1).pause(0);
+
+  return () =&gt; {
+    controls.forEach((btn) =&gt; {
+      const fn = handlers[btn.dataset.action];
+      if (fn) btn.removeEventListener("click", fn);
+    });
+    tl.kill();
+    gsap.set([main, ghost], { clearProps: "all" });
+  };
+}
+
+export { initSectionDuotone };</code></pre>
+          </details>
+          <details class="code-box">
+            <summary>How to apply this effect</summary>
+            <div class="code-box__body">
+              <ol>
+                <li>Markup: <code>&lt;div class="duotone"&gt;&lt;span class="duotone__ghost"&gt;Text&lt;/span&gt;&lt;span class="duotone__main"&gt;Text&lt;/span&gt;&lt;/div&gt;</code></li>
+                <li>JS (module): <code>import { initSectionDuotone } from "./js/sections/sectionDuotone.js"; import "./js/gsapSetup.js";</code></li>
+                <li>Init after DOM ready: <code>initSectionDuotone(document.querySelector(".my-section"), false);</code></li>
+                <li>Fire the timeline when you want the ghost layer to slide under the main text.</li>
+              </ol>
+            </div>
+          </details>
+          <details class="code-box">
+          <summary>What to tweak</summary>
+          <div class="code-box__body">
+            <ul>
+                <li>Offsets:
+                  <pre><code>gsap.set(ghost, { xPercent: -20, yPercent: 30 });</code></pre>
+                </li>
+                <li>Accent strength:
+                  <pre><code>to(ghost, { autoAlpha: 0.5 })</code></pre>
+                </li>
+                <li>Ease:
+                  <pre><code>defaults: { ease: Motion.ease.soft }</code></pre>
+                </li>
+            </ul>
+          </div>
+        </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="bounce" class="panel panel--alt">
+      <div class="panel__inner">
+        <p class="eyebrow">Technique 11</p>
+        <h2 class="panel__title">Bounce Lift</h2>
+        <p class="panel__body">Characters pop upward with a soft back-out ease for playful emphasis.</p>
+        <div class="demo">
+          <div class="demo__text split" data-anim="bounce">Bounce into view with ease.</div>
+        </div>
+        <div class="controls">
+          <button data-action="play">Play</button>
+          <button data-action="reverse">Reverse</button>
+          <button data-action="restart">Restart</button>
+        </div>
+        <div class="meta">
+          <div class="prompt-box">
+            <p class="prompt-box__title">Codex Prompt</p>
+            <p>Create a GSAP character bounce: split text into chars and pop them in with a back-out ease using transform-only y/scale/opacity.</p>
+          </div>
+          <details class="code-box">
+            <summary>View JS for this animation</summary>
+            <pre><code>import { gsap, Motion } from "../gsapSetup.js";
+import { splitByChars } from "../utils/text.js";
+
+// Bounce lift for characters with elastic ease.
+function initSectionBounce(section, isReduced) {
+  const text = section?.querySelector("[data-anim='bounce']");
+  const controls = section?.querySelectorAll(".controls button");
+  if (!text || !controls?.length) return () =&gt; {};
+
+  const chars = splitByChars(text);
+  const duration = isReduced ? 0.01 : Motion.duration.sm;
+
+  gsap.set(chars, { yPercent: 120, scale: 0.82, autoAlpha: 0, transformOrigin: "50% 80%" });
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { ease: "back.out(1.8)", duration }
+  });
+
+  tl.to(chars, {
+    yPercent: 0,
+    scale: 1,
+    autoAlpha: 1,
+    stagger: 0.05
+  });
+
+  const handlers = { play: () =&gt; tl.play(), reverse: () =&gt; tl.reverse(), restart: () =&gt; tl.restart() };
+  controls.forEach((btn) =&gt; {
+    const fn = handlers[btn.dataset.action];
+    if (fn) btn.addEventListener("click", fn);
+  });
+
+  if (isReduced) tl.progress(1).pause(0);
+
+  return () =&gt; {
+    controls.forEach((btn) =&gt; {
+      const fn = handlers[btn.dataset.action];
+      if (fn) btn.removeEventListener("click", fn);
+    });
+    tl.kill();
+    gsap.set(chars, { clearProps: "all" });
+  };
+}
+
+export { initSectionBounce };</code></pre>
+          </details>
+          <details class="code-box">
+            <summary>How to apply this effect</summary>
+            <div class="code-box__body">
+              <ol>
+                <li>Markup: <code>&lt;h3 class="my-bounce"&gt;Your text&lt;/h3&gt;</code></li>
+                <li>JS (module): <code>import { initSectionBounce } from "./js/sections/sectionBounce.js"; import "./js/gsapSetup.js";</code></li>
+                <li>Init after DOM ready: <code>initSectionBounce(document.querySelector(".my-section"), false);</code></li>
+                <li>Trigger the timeline from your own reveal/hovers to pop the chars in.</li>
+              </ol>
+            </div>
+          </details>
+          <details class="code-box">
+          <summary>What to tweak</summary>
+          <div class="code-box__body">
+            <ul>
+                <li>Overshoot:
+                  <pre><code>defaults: { ease: "back.out(1.8)" }</code></pre>
+                </li>
+                <li>Start scale:
+                  <pre><code>gsap.set(chars, { scale: 0.82 });</code></pre>
+                </li>
+                <li>Rhythm:
+                  <pre><code>to(chars, { stagger: 0.05 })</code></pre>
+                </li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="shadow" class="panel">
+      <div class="panel__inner">
+        <p class="eyebrow">Technique 12</p>
+        <h2 class="panel__title">Offset Shadow Slide</h2>
+        <p class="panel__body">A shadow clone slides into place under the text for dimensional emphasis.</p>
+        <div class="demo demo--shadow">
+          <div class="shadow">
+            <span class="shadow__clone" aria-hidden="true">Shadowed emphasis text.</span>
+            <span class="shadow__main" data-anim="shadow">Shadowed emphasis text.</span>
+          </div>
+        </div>
+        <div class="controls">
+          <button data-action="play">Play</button>
+          <button data-action="reverse">Reverse</button>
+          <button data-action="restart">Restart</button>
+        </div>
+        <div class="meta">
+          <div class="prompt-box">
+            <p class="prompt-box__title">Codex Prompt</p>
+            <p>Animate a text + shadow pair: slide an offset clone into place while lifting the main text with opacity.</p>
+          </div>
+          <details class="code-box">
+            <summary>View JS for this animation</summary>
+            <pre><code>import { gsap, Motion } from "../gsapSetup.js";
+
+// Shadow slide uses a clone layer offset behind the main text.
+function initSectionShadow(section, isReduced) {
+  const main = section?.querySelector("[data-anim='shadow']");
+  const clone = section?.querySelector(".shadow__clone");
+  const controls = section?.querySelectorAll(".controls button");
+  if (!main || !clone || !controls?.length) return () =&gt; {};
+
+  const duration = isReduced ? 0.01 : Motion.duration.md;
+
+  gsap.set(main, { yPercent: 30, scale: 0.96, autoAlpha: 0.85, transformOrigin: "50% 50%" });
+  gsap.set(clone, { xPercent: -24, yPercent: 30, scale: 0.9, autoAlpha: 0 });
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { ease: Motion.ease.out, duration }
+  });
+
+  tl.to(clone, { xPercent: 0, yPercent: 0, scale: 1, autoAlpha: 0.5 })
+    .to(main, { yPercent: 0, scale: 1, autoAlpha: 1 }, 0);
+
+  const handlers = { play: () =&gt; tl.play(), reverse: () =&gt; tl.reverse(), restart: () =&gt; tl.restart() };
+  controls.forEach((btn) =&gt; {
+    const fn = handlers[btn.dataset.action];
+    if (fn) btn.addEventListener("click", fn);
+  });
+
+  if (isReduced) tl.progress(1).pause(0);
+
+  return () =&gt; {
+    controls.forEach((btn) =&gt; {
+      const fn = handlers[btn.dataset.action];
+      if (fn) btn.removeEventListener("click", fn);
+    });
+    tl.kill();
+    gsap.set([main, clone], { clearProps: "all" });
+  };
+}
+
+export { initSectionShadow };</code></pre>
+          </details>
+          <details class="code-box">
+            <summary>How to apply this effect</summary>
+            <div class="code-box__body">
+              <ol>
+                <li>Markup: <code>&lt;div class="shadow"&gt;&lt;span class="shadow__clone"&gt;Text&lt;/span&gt;&lt;span class="shadow__main"&gt;Text&lt;/span&gt;&lt;/div&gt;</code></li>
+                <li>JS (module): <code>import { initSectionShadow } from "./js/sections/sectionShadow.js"; import "./js/gsapSetup.js";</code></li>
+                <li>Init after DOM ready: <code>initSectionShadow(document.querySelector(".my-section"), false);</code></li>
+                <li>Fire the timeline when you want the shadow to slide under your text.</li>
+              </ol>
+            </div>
+          </details>
+          <details class="code-box">
+          <summary>What to tweak</summary>
+          <div class="code-box__body">
+            <ul>
+                <li>Clone offset:
+                  <pre><code>gsap.set(clone, { xPercent: -28, yPercent: 34 });</code></pre>
+                </li>
+                <li>Shadow strength:
+                  <pre><code>to(clone, { autoAlpha: 0.65 });</code></pre>
+                </li>
+                <li>Ease:
+                  <pre><code>defaults: { ease: Motion.ease.soft }</code></pre>
+                </li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="glow" class="panel panel--alt">
+      <div class="panel__inner">
+        <p class="eyebrow">Technique 13</p>
+        <h2 class="panel__title">Glow Trail Rise</h2>
+        <p class="panel__body">Characters rise with a soft neon trail that fades as they settle.</p>
+        <div class="demo demo--glow">
+          <div class="demo__text split" data-anim="glow">Glow into position.</div>
+        </div>
+        <div class="controls">
+          <button data-action="play">Play</button>
+          <button data-action="reverse">Reverse</button>
+          <button data-action="restart">Restart</button>
+        </div>
+        <div class="meta">
+          <div class="prompt-box">
+            <p class="prompt-box__title">Codex Prompt</p>
+            <p>Create a neon glow rise: split characters and animate them up with a text-shadow bloom as they appear.</p>
+          </div>
+          <details class="code-box">
+            <summary>View JS for this animation</summary>
+            <pre><code>import { gsap, Motion } from "../gsapSetup.js";
+import { splitByChars } from "../utils/text.js";
+
+// Glow trail: characters rise while text-shadow intensity blooms.
+function initSectionGlowTrail(section, isReduced) {
+  const text = section?.querySelector("[data-anim='glow']");
+  const controls = section?.querySelectorAll(".controls button");
+  if (!text || !controls?.length) return () =&gt; {};
+
+  const chars = splitByChars(text);
+  const duration = isReduced ? 0.01 : Motion.duration.sm;
+
+  gsap.set(chars, {
+    yPercent: 140,
+    autoAlpha: 0,
+    textShadow: "0px 0px 0px rgba(122, 215, 255, 0)"
+  });
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { ease: Motion.ease.out, duration }
+  });
+
+  tl.to(chars, {
+    yPercent: 0,
+    autoAlpha: 1,
+    textShadow: "0px 8px 22px rgba(122, 215, 255, 0.65)",
+    stagger: 0.04
+  });
+
+  const handlers = { play: () =&gt; tl.play(), reverse: () =&gt; tl.reverse(), restart: () =&gt; tl.restart() };
+  controls.forEach((btn) =&gt; {
+    const fn = handlers[btn.dataset.action];
+    if (fn) btn.addEventListener("click", fn);
+  });
+
+  if (isReduced) tl.progress(1).pause(0);
+
+  return () =&gt; {
+    controls.forEach((btn) =&gt; {
+      const fn = handlers[btn.dataset.action];
+      if (fn) btn.removeEventListener("click", fn);
+    });
+    tl.kill();
+    gsap.set(chars, { clearProps: "all" });
+  };
+}
+
+export { initSectionGlowTrail };</code></pre>
+          </details>
+          <details class="code-box">
+            <summary>How to apply this effect</summary>
+            <div class="code-box__body">
+              <ol>
+                <li>Markup: <code>&lt;h3 class="my-glow"&gt;Your text&lt;/h3&gt;</code></li>
+                <li>JS (module): <code>import { initSectionGlowTrail } from "./js/sections/sectionGlowTrail.js"; import "./js/gsapSetup.js";</code></li>
+                <li>Init after DOM ready: <code>initSectionGlowTrail(document.querySelector(".my-section"), false);</code></li>
+                <li>Trigger the timeline when you want the glow rise to play.</li>
+              </ol>
+            </div>
+          </details>
+          <details class="code-box">
+          <summary>What to tweak</summary>
+          <div class="code-box__body">
+            <ul>
+                <li>Glow intensity:
+                  <pre><code>textShadow: "0px 8px 22px rgba(122, 215, 255, 0.65)"</code></pre>
+                </li>
+                <li>Cadence:
+                  <pre><code>stagger: 0.04 // increase for slower trail</code></pre>
+                </li>
+                <li>Start height:
+                  <pre><code>gsap.set(chars, { yPercent: 140 });</code></pre>
+                </li>
+            </ul>
+          </div>
+        </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="skew" class="panel">
+      <div class="panel__inner">
+        <p class="eyebrow">Technique 14</p>
+        <h2 class="panel__title">Skew Slide In</h2>
+        <p class="panel__body">A sheared entrance that snaps to neutral for a crisp arrival.</p>
+        <div class="demo demo--skew">
+          <div class="demo__text" data-anim="skew">Sheared then steady.</div>
+        </div>
+        <div class="controls">
+          <button data-action="play">Play</button>
+          <button data-action="reverse">Reverse</button>
+          <button data-action="restart">Restart</button>
+        </div>
+        <div class="meta">
+          <div class="prompt-box">
+            <p class="prompt-box__title">Codex Prompt</p>
+            <p>Shear text in with a skewed slide, then settle to neutral for a clean lock-up.</p>
+          </div>
+          <details class="code-box">
+            <summary>View JS for this animation</summary>
+            <pre><code>import { gsap, Motion } from "../gsapSetup.js";
+
+// Skew slide: text shears in then settles to neutral.
+function initSectionSkewSlide(section, isReduced) {
+  const text = section?.querySelector("[data-anim='skew']");
+  const controls = section?.querySelectorAll(".controls button");
+  if (!text || !controls?.length) return () =&gt; {};
+
+  const duration = isReduced ? 0.01 : Motion.duration.md;
+
+  gsap.set(text, { xPercent: -18, skewX: -12, autoAlpha: 0 });
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { ease: Motion.ease.out, duration }
+  });
+
+  tl.to(text, { xPercent: 0, skewX: 0, autoAlpha: 1 });
+
+  const handlers = { play: () =&gt; tl.play(), reverse: () =&gt; tl.reverse(), restart: () =&gt; tl.restart() };
+  controls.forEach((btn) =&gt; {
+    const fn = handlers[btn.dataset.action];
+    if (fn) btn.addEventListener("click", fn);
+  });
+
+  if (isReduced) tl.progress(1).pause(0);
+
+  return () =&gt; {
+    controls.forEach((btn) =&gt; {
+      const fn = handlers[btn.dataset.action];
+      if (fn) btn.removeEventListener("click", fn);
+    });
+    tl.kill();
+    gsap.set(text, { clearProps: "all" });
+  };
+}
+
+export { initSectionSkewSlide };</code></pre>
+          </details>
+          <details class="code-box">
+            <summary>How to apply this effect</summary>
+            <div class="code-box__body">
+              <ol>
+                <li>Markup: <code>&lt;p class="my-skew"&gt;Your text&lt;/p&gt;</code></li>
+                <li>JS (module): <code>import { initSectionSkewSlide } from "./js/sections/sectionSkewSlide.js"; import "./js/gsapSetup.js";</code></li>
+                <li>Init after DOM ready: <code>initSectionSkewSlide(document.querySelector(".my-section"), false);</code></li>
+                <li>Trigger when you want the skewed entrance.</li>
+              </ol>
+            </div>
+          </details>
+          <details class="code-box">
+          <summary>What to tweak</summary>
+          <div class="code-box__body">
+            <ul>
+                <li>Shear amount:
+                  <pre><code>gsap.set(text, { skewX: -12 });</code></pre>
+                </li>
+                <li>Slide distance:
+                  <pre><code>gsap.set(text, { xPercent: -18 });</code></pre>
+                </li>
+                <li>Ease:
+                  <pre><code>defaults: { ease: Motion.ease.soft }</code></pre>
+                </li>
+            </ul>
+          </div>
+        </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button class="back-to-top" type="button" aria-label="Back to top">
+    ↑ Top
+  </button>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
