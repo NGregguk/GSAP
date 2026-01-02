@@ -8,6 +8,15 @@
 </head>
 <body>
   <main class="page">
+    <div class="top-bar">
+      <div class="top-bar__inner">
+        <p class="top-bar__label">Navigation</p>
+        <div class="top-nav">
+          <a class="nav-link" href="./index.html">Text animations</a>
+          <a class="nav-link active" href="./ui-animations.html" aria-current="page">UI motion patterns (current)</a>
+        </div>
+      </div>
+    </div>
     <header class="page__header page__header--hero">
       <div class="hero-shell">
         <div class="hero-copy">
@@ -21,10 +30,6 @@
             <span class="hero-badge">Beginner friendly</span>
             <span class="hero-badge">Transforms + opacity only</span>
             <span class="hero-badge">Open/close with one timeline</span>
-          </div>
-          <div class="hero-actions">
-            <a class="cta cta--primary" href="#hero">Preview patterns</a>
-            <a class="cta cta--ghost" href="./index.html">Go to text animation page</a>
           </div>
           <div class="hero-meta">
             <div class="meta-block">
@@ -42,10 +47,6 @@
               <p class="meta-value">Transforms</p>
               <p class="meta-desc">Opacity + GPU friendly</p>
             </div>
-          </div>
-          <div class="top-nav top-nav--hero">
-            <a class="nav-link" href="./index.html">Text animations</a>
-            <a class="nav-link active" href="./ui-animations.html" aria-current="page">UI motion patterns (current)</a>
           </div>
         </div>
         <div class="hero-card">
@@ -976,6 +977,366 @@ bell.addEventListener("click", () =&gt; {
                   </li>
                   <li>Badge position:
                     <pre><code>.bell__badge { top: -6px; right: -6px; }</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel--alt" id="stepper">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 15</p>
+        <h2 class="panel__title">Stepper Progress Rail</h2>
+        <p class="panel__body">Move through steps with a sliding indicator and active label.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <div class="stepper">
+              <div class="stepper__track" role="tablist">
+                <button class="stepper__step is-active" data-step="0" role="tab" aria-selected="true">Plan</button>
+                <button class="stepper__step" data-step="1" role="tab" aria-selected="false">Build</button>
+                <button class="stepper__step" data-step="2" role="tab" aria-selected="false">Test</button>
+                <button class="stepper__step" data-step="3" role="tab" aria-selected="false">Ship</button>
+                <span class="stepper__indicator" aria-hidden="true"></span>
+              </div>
+              <div class="stepper__content">
+                <p class="stepper__label">Plan the motion flow.</p>
+              </div>
+              <div class="stepper__controls">
+                <button class="button button--ghost" data-stepper="prev">Prev</button>
+                <button class="button button--pill" data-stepper="next">Next</button>
+              </div>
+            </div>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const steps = gsap.utils.toArray(".stepper__step");
+const indicator = document.querySelector(".stepper__indicator");
+const label = document.querySelector(".stepper__label");
+const setStep = (index) =&gt; {
+  const step = steps[index];
+  gsap.to(indicator, { x: step.offsetLeft, width: step.offsetWidth, duration: Motion.duration.sm });
+  gsap.fromTo(label, { autoAlpha: 0, y: 6 }, { autoAlpha: 1, y: 0, duration: Motion.duration.sm });
+};</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Keep <code>.stepper__step</code> buttons and one <code>.stepper__indicator</code>.</li>
+                  <li>Import <code>initStepper</code> (via <code>ui.js</code>) and call after DOM ready.</li>
+                  <li>Prev/Next buttons advance the active step.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Indicator speed:
+                    <pre><code>duration: Motion.duration.sm</code></pre>
+                  </li>
+                  <li>Step count:
+                    <pre><code>grid-template-columns: repeat(4, 1fr);</code></pre>
+                  </li>
+                  <li>Label text:
+                    <pre><code>labels = ["Plan", "Build", "Test", "Ship"];</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="stats">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 16</p>
+        <h2 class="panel__title">Stats Reveal Stack</h2>
+        <p class="panel__body">Reveal a short list with a staggered lift and fade.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <div class="stats-card">
+              <div class="stats-card__header">
+                <p class="stats-card__title">Weekly snapshot</p>
+                <button class="button button--pill" data-stats="toggle">Toggle stats</button>
+              </div>
+              <ul class="stats-list" aria-hidden="true">
+                <li class="stats-item"><span>Active users</span><strong>1,420</strong></li>
+                <li class="stats-item"><span>Conversion</span><strong>4.8%</strong></li>
+                <li class="stats-item"><span>Avg. session</span><strong>3m 12s</strong></li>
+              </ul>
+            </div>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const items = gsap.utils.toArray(".stats-item");
+const tl = gsap.timeline({ paused: true, defaults: { duration: Motion.duration.sm, ease: Motion.ease.out }});
+tl.fromTo(items, { y: 10, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: 0.06 });
+button.addEventListener("click", () =&gt; tl.reversed() ? tl.play() : tl.reverse());</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Wrap list items in <code>.stats-list</code> and trigger with <code>[data-stats="toggle"]</code>.</li>
+                  <li>Import <code>initStats</code> (via <code>ui.js</code>) and call after DOM ready.</li>
+                  <li>Timeline reverses for a clean hide.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Stagger spacing:
+                    <pre><code>stagger: 0.06</code></pre>
+                  </li>
+                  <li>Lift distance:
+                    <pre><code>fromTo(items, { y: 10 }, { y: 0 })</code></pre>
+                  </li>
+                  <li>Card width:
+                    <pre><code>.stats-card { max-width: 420px; }</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel--alt" id="chips">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 17</p>
+        <h2 class="panel__title">Filter Chip Toggle</h2>
+        <p class="panel__body">Select a filter with a sliding chip highlight and label update.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <div class="chip-group" role="tablist">
+              <button class="chip is-active" data-chip="All" role="tab" aria-selected="true">All</button>
+              <button class="chip" data-chip="UI" role="tab" aria-selected="false">UI</button>
+              <button class="chip" data-chip="Motion" role="tab" aria-selected="false">Motion</button>
+              <button class="chip" data-chip="Docs" role="tab" aria-selected="false">Docs</button>
+              <span class="chip-indicator" aria-hidden="true"></span>
+            </div>
+            <p class="chip-note">Showing: All</p>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const chips = gsap.utils.toArray(".chip");
+const indicator = document.querySelector(".chip-indicator");
+const note = document.querySelector(".chip-note");
+const activate = (chip) =&gt; {
+  chips.forEach((c) =&gt; c.classList.toggle("is-active", c === chip));
+  gsap.to(indicator, { x: chip.offsetLeft, width: chip.offsetWidth, duration: Motion.duration.sm });
+  note.textContent = `Showing: ${chip.dataset.chip}`;
+};</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Group buttons inside <code>.chip-group</code> with a <code>.chip-indicator</code>.</li>
+                  <li>Import <code>initChips</code> (via <code>ui.js</code>) and call after DOM ready.</li>
+                  <li>Indicator tracks the active chip; label updates the selection.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Indicator speed:
+                    <pre><code>duration: Motion.duration.sm</code></pre>
+                  </li>
+                  <li>Chip count:
+                    <pre><code>grid-template-columns: repeat(4, 1fr);</code></pre>
+                  </li>
+                  <li>Label copy:
+                    <pre><code>note.textContent = `Showing: ${name}`;</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="banner">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 18</p>
+        <h2 class="panel__title">Inline Banner Slide</h2>
+        <p class="panel__body">Reveal a dismissible banner with a smooth slide and fade.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <button class="button button--pill" data-banner="show">Show banner</button>
+            <div class="banner" role="status" aria-live="polite">
+              <div class="banner__content">
+                <strong>Heads up</strong>
+                <span>New patterns were added this week.</span>
+              </div>
+              <button class="button button--ghost" data-banner="close">Dismiss</button>
+            </div>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const banner = document.querySelector(".banner");
+const tl = gsap.timeline({ paused: true, defaults:{ duration: Motion.duration.sm, ease: Motion.ease.out }});
+tl.fromTo(banner, { y: -8, autoAlpha: 0 }, { y: 0, autoAlpha: 1, pointerEvents: "auto" });
+showBtn.addEventListener("click", () =&gt; tl.play());
+closeBtn.addEventListener("click", () =&gt; tl.reverse());</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Place a <code>.banner</code> with content and a dismiss button.</li>
+                  <li>Import <code>initBanner</code> (via <code>ui.js</code>) and call after DOM ready.</li>
+                  <li>Timeline handles show/hide for a clean reverse.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Slide distance:
+                    <pre><code>fromTo(banner, { y: -8 }, { y: 0 })</code></pre>
+                  </li>
+                  <li>Banner width:
+                    <pre><code>.banner { max-width: 520px; }</code></pre>
+                  </li>
+                  <li>Accent color:
+                    <pre><code>.banner { border-color: rgba(122, 215, 255, 0.3); }</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel panel--alt" id="avatars">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 19</p>
+        <h2 class="panel__title">Avatar Stack Expand</h2>
+        <p class="panel__body">Tap the stack to fan avatars outward and reveal names.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <button class="avatar-stack" type="button" aria-expanded="false">
+              <span class="avatar" data-name="Ava"></span>
+              <span class="avatar" data-name="Noah"></span>
+              <span class="avatar" data-name="Mia"></span>
+              <span class="avatar" data-name="Leo"></span>
+              <span class="avatar-label">Team</span>
+            </button>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const stack = document.querySelector(".avatar-stack");
+const avatars = gsap.utils.toArray(".avatar");
+const tl = gsap.timeline({ paused: true, defaults: { duration: Motion.duration.sm, ease: Motion.ease.out }});
+tl.to(avatars, { x: (i) =&gt; (i + 1) * 36, autoAlpha: 1, stagger: 0.05 }, 0);
+stack.addEventListener("click", () =&gt; tl.reversed() || tl.progress() === 0 ? tl.play() : tl.reverse());</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Use a <code>.avatar-stack</code> button with multiple <code>.avatar</code> spans.</li>
+                  <li>Import <code>initAvatarStack</code> (via <code>ui.js</code>) and call after DOM ready.</li>
+                  <li>Click toggles the fan and updates <code>aria-expanded</code>.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Fan distance:
+                    <pre><code>x: (i) =&gt; (i + 1) * 36</code></pre>
+                  </li>
+                  <li>Stack size:
+                    <pre><code>avatars.length</code></pre>
+                  </li>
+                  <li>Label:
+                    <pre><code>.avatar-label { font-weight: 700; }</code></pre>
+                  </li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="palette">
+      <div class="panel__inner">
+        <p class="eyebrow">Pattern 20</p>
+        <h2 class="panel__title">Command Palette Slide</h2>
+        <p class="panel__body">Open a lightweight command palette with a top slide and staggered list.</p>
+        <div class="pattern-grid">
+          <div class="pattern-main">
+            <button class="button button--pill" data-palette="open">Open palette</button>
+            <div class="palette" aria-hidden="true">
+              <div class="palette__panel" role="dialog" aria-label="Command palette">
+                <input class="palette__input" type="text" placeholder="Type a command..." />
+                <ul class="palette__list">
+                  <li>Switch theme</li>
+                  <li>Search patterns</li>
+                  <li>Open docs</li>
+                  <li>Run export</li>
+                </ul>
+                <button class="button button--ghost" data-palette="close">Close</button>
+              </div>
+            </div>
+          </div>
+          <div class="meta-stack">
+            <p class="meta-stack__title">Implementation Notes</p>
+            <details class="code-box">
+              <summary>View JS for this pattern</summary>
+              <pre><code>const tl = gsap.timeline({ paused: true, defaults: { duration: Motion.duration.sm, ease: Motion.ease.out }});
+tl.fromTo(panel, { y: -20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, pointerEvents: "auto" })
+  .fromTo(items, { y: 6, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: 0.05 }, 0.05);</code></pre>
+            </details>
+            <details class="code-box">
+              <summary>How to apply</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Wrap a <code>.palette__panel</code> inside <code>.palette</code>.</li>
+                  <li>Import <code>initPalette</code> (via <code>ui.js</code>) and call after DOM ready.</li>
+                  <li>Open/close buttons control the timeline.</li>
+                </ul>
+              </div>
+            </details>
+            <details class="code-box">
+              <summary>What to tweak</summary>
+              <div class="code-box__body">
+                <ul>
+                  <li>Slide distance:
+                    <pre><code>fromTo(panel, { y: -20 }, { y: 0 })</code></pre>
+                  </li>
+                  <li>List stagger:
+                    <pre><code>stagger: 0.05</code></pre>
+                  </li>
+                  <li>Panel width:
+                    <pre><code>.palette__panel { max-width: 520px; }</code></pre>
                   </li>
                 </ul>
               </div>

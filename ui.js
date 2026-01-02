@@ -320,6 +320,214 @@ function initBell() {
   };
 }
 
+function initStepper() {
+  const stepper = document.querySelector(".stepper");
+  if (!stepper) return () => {};
+  const steps = gsap.utils.toArray(".stepper__step");
+  const indicator = stepper.querySelector(".stepper__indicator");
+  const label = stepper.querySelector(".stepper__label");
+  const prev = stepper.querySelector("[data-stepper='prev']");
+  const next = stepper.querySelector("[data-stepper='next']");
+  if (!steps.length || !indicator || !label || !prev || !next) return () => {};
+
+  const labels = [
+    "Plan the motion flow.",
+    "Build the UI states.",
+    "Test with real content.",
+    "Ship and monitor usage."
+  ];
+  let index = 0;
+
+  const setStep = (nextIndex) => {
+    index = Math.max(0, Math.min(steps.length - 1, nextIndex));
+    steps.forEach((step, i) => {
+      const isActive = i === index;
+      step.classList.toggle("is-active", isActive);
+      step.setAttribute("aria-selected", isActive ? "true" : "false");
+    });
+    const active = steps[index];
+    gsap.to(indicator, {
+      x: active.offsetLeft,
+      width: active.offsetWidth,
+      duration: Motion.duration.sm,
+      ease: Motion.ease.out
+    });
+    label.textContent = labels[index] || "";
+    gsap.fromTo(label, { autoAlpha: 0, y: 6 }, { autoAlpha: 1, y: 0, duration: Motion.duration.sm });
+  };
+
+  const handleStepClick = (e) => {
+    const idx = steps.indexOf(e.currentTarget);
+    setStep(idx);
+  };
+
+  steps.forEach((step) => step.addEventListener("click", handleStepClick));
+  prev.addEventListener("click", () => setStep(index - 1));
+  next.addEventListener("click", () => setStep(index + 1));
+  window.addEventListener("resize", () => setStep(index));
+  setStep(0);
+
+  return () => {
+    steps.forEach((step) => step.removeEventListener("click", handleStepClick));
+    prev.replaceWith(prev.cloneNode(true));
+    next.replaceWith(next.cloneNode(true));
+  };
+}
+
+function initStats() {
+  const card = document.querySelector(".stats-card");
+  if (!card) return () => {};
+  const btn = card.querySelector("[data-stats='toggle']");
+  const items = gsap.utils.toArray(".stats-item");
+  if (!btn || !items.length) return () => {};
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { duration: Motion.duration.sm, ease: Motion.ease.out }
+  });
+  tl.fromTo(items, { y: 10, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: 0.06 });
+
+  const toggle = () => (tl.reversed() || tl.progress() === 0 ? tl.play() : tl.reverse());
+  btn.addEventListener("click", toggle);
+
+  return () => {
+    btn.removeEventListener("click", toggle);
+    tl.kill();
+    gsap.set(items, { clearProps: "all" });
+  };
+}
+
+function initChips() {
+  const group = document.querySelector(".chip-group");
+  if (!group) return () => {};
+  const chips = gsap.utils.toArray(".chip");
+  const indicator = group.querySelector(".chip-indicator");
+  const note = document.querySelector(".chip-note");
+  if (!chips.length || !indicator || !note) return () => {};
+
+  const setChip = (chip) => {
+    chips.forEach((c) => {
+      const isActive = c === chip;
+      c.classList.toggle("is-active", isActive);
+      c.setAttribute("aria-selected", isActive ? "true" : "false");
+    });
+    gsap.to(indicator, {
+      x: chip.offsetLeft,
+      width: chip.offsetWidth,
+      duration: Motion.duration.sm,
+      ease: Motion.ease.out
+    });
+    note.textContent = `Showing: ${chip.dataset.chip}`;
+  };
+
+  const handleClick = (e) => setChip(e.currentTarget);
+
+  chips.forEach((chip) => chip.addEventListener("click", handleClick));
+  window.addEventListener("resize", () => setChip(chips.find((c) => c.classList.contains("is-active")) || chips[0]));
+  setChip(chips[0]);
+
+  return () => {
+    chips.forEach((chip) => chip.removeEventListener("click", handleClick));
+  };
+}
+
+function initBanner() {
+  const banner = document.querySelector(".banner");
+  const showBtn = document.querySelector("[data-banner='show']");
+  const closeBtn = document.querySelector("[data-banner='close']");
+  if (!banner || !showBtn || !closeBtn) return () => {};
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { duration: Motion.duration.sm, ease: Motion.ease.out }
+  });
+
+  tl.fromTo(banner, { y: -8, autoAlpha: 0 }, { y: 0, autoAlpha: 1, pointerEvents: "auto" });
+
+  const show = () => tl.play();
+  const hide = () => tl.reverse();
+
+  showBtn.addEventListener("click", show);
+  closeBtn.addEventListener("click", hide);
+
+  return () => {
+    showBtn.removeEventListener("click", show);
+    closeBtn.removeEventListener("click", hide);
+    tl.kill();
+    gsap.set(banner, { clearProps: "all" });
+  };
+}
+
+function initAvatarStack() {
+  const stack = document.querySelector(".avatar-stack");
+  if (!stack) return () => {};
+  const avatars = gsap.utils.toArray(".avatar");
+  if (!avatars.length) return () => {};
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { duration: Motion.duration.sm, ease: Motion.ease.out }
+  });
+
+  tl.to(avatars, {
+    x: (i) => (i + 1) * 36,
+    autoAlpha: 1,
+    stagger: 0.05
+  }, 0);
+
+  const toggle = () => {
+    const isOpening = tl.reversed() || tl.progress() === 0;
+    stack.setAttribute("aria-expanded", isOpening ? "true" : "false");
+    isOpening ? tl.play() : tl.reverse();
+  };
+
+  stack.addEventListener("click", toggle);
+
+  return () => {
+    stack.removeEventListener("click", toggle);
+    tl.kill();
+    gsap.set(avatars, { clearProps: "all" });
+  };
+}
+
+function initPalette() {
+  const palette = document.querySelector(".palette");
+  if (!palette) return () => {};
+  const panel = palette.querySelector(".palette__panel");
+  const items = gsap.utils.toArray(".palette__list li");
+  const openBtn = document.querySelector("[data-palette='open']");
+  const closeBtn = document.querySelector("[data-palette='close']");
+  if (!panel || !openBtn || !closeBtn) return () => {};
+
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { duration: Motion.duration.sm, ease: Motion.ease.out }
+  });
+
+  tl.fromTo(panel, { y: -20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, pointerEvents: "auto" })
+    .fromTo(items, { y: 6, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: 0.05 }, 0.05);
+
+  const open = () => {
+    palette.setAttribute("aria-hidden", "false");
+    tl.play();
+  };
+  const close = () => {
+    palette.setAttribute("aria-hidden", "true");
+    tl.reverse();
+  };
+
+  openBtn.addEventListener("click", open);
+  closeBtn.addEventListener("click", close);
+
+  return () => {
+    openBtn.removeEventListener("click", open);
+    closeBtn.removeEventListener("click", close);
+    tl.kill();
+    gsap.set(panel, { clearProps: "all" });
+    gsap.set(items, { clearProps: "all" });
+  };
+}
+
 // Hero parallax
 function initHero() {
   const hero = document.querySelector(".hero");
@@ -629,6 +837,12 @@ function init() {
   cleanups.push(initFab());
   cleanups.push(initSearch());
   cleanups.push(initBell());
+  cleanups.push(initStepper());
+  cleanups.push(initStats());
+  cleanups.push(initChips());
+  cleanups.push(initBanner());
+  cleanups.push(initAvatarStack());
+  cleanups.push(initPalette());
   cleanups.push(initCopyButtons());
   cleanups.push(initBackToTop());
   const rm = initReducedMotionFallback(cleanups);
