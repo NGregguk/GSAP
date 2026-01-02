@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avatar Stack Expand Example</title>
+  <link rel="stylesheet" href="./avatar-stack.css">
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div class="brand">Motion Workspace</div>
+      <div class="header-actions">
+        <button class="button button--ghost" type="button">Invite</button>
+        <button class="button button--pill" type="button">New project</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">Team hub</p>
+      <h1>Launch squad activity</h1>
+      <p class="lede">Use the avatar stack to reveal who is active on this workspace without leaving the page.</p>
+    </section>
+
+    <section class="card">
+      <div class="card__header">
+        <div>
+          <p class="card__eyebrow">Project</p>
+          <h2>Website refresh</h2>
+          <p class="card__subhead">Weekly standup, design review, and QA check-ins.</p>
+        </div>
+        <button class="button" type="button">Open board</button>
+      </div>
+      <div class="card__body">
+        <button class="avatar-stack" type="button" aria-expanded="false">
+          <span class="avatar" data-name="Ava">A</span>
+          <span class="avatar" data-name="Noah">N</span>
+          <span class="avatar" data-name="Mia">M</span>
+          <span class="avatar" data-name="Leo">L</span>
+          <span class="avatar-label">4 online</span>
+        </button>
+        <div class="team-meta">
+          <div class="team-names" aria-hidden="true">
+            <span class="name-pill">Ava</span>
+            <span class="name-pill">Noah</span>
+            <span class="name-pill">Mia</span>
+            <span class="name-pill">Leo</span>
+          </div>
+          <p class="team-note">Tap the stack to expand the roster.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card card--list">
+      <div class="card__header">
+        <div>
+          <p class="card__eyebrow">Upcoming</p>
+          <h2>Next steps</h2>
+          <p class="card__subhead">Keep the team aligned with lightweight status updates.</p>
+        </div>
+      </div>
+      <ul class="task-list">
+        <li><span>Finalize hero layout</span><strong>Today</strong></li>
+        <li><span>Motion polish review</span><strong>Wed</strong></li>
+        <li><span>Accessibility sweep</span><strong>Fri</strong></li>
+      </ul>
+    </section>
+  </div>
+
+  <script type="module" src="./avatar-stack.js"></script>
+</body>
+</html>

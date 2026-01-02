@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap");
+
+:root {
+  --bg: #0d1018;
+  --panel: #151a28;
+  --text: #eef1f7;
+  --muted: #a4aec2;
+  --accent: #7ad7ff;
+  --accent-2: #f2a3ff;
+  --radius: 18px;
+  --shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.page {
+  width: min(1080px, 100%);
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+  display: grid;
+  gap: 20px;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.button {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button--pill {
+  background: linear-gradient(120deg, rgba(122, 215, 255, 0.2), rgba(242, 163, 255, 0.2));
+}
+
+.button--ghost {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 40px;
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  min-height: 320px;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 25% 30%, rgba(122, 215, 255, 0.25), transparent 40%),
+              radial-gradient(circle at 75% 60%, rgba(242, 163, 255, 0.25), transparent 38%);
+}
+
+.hero__circle {
+  position: absolute;
+  top: 20%;
+  right: 12%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(122, 215, 255, 0.4), rgba(242, 163, 255, 0.4));
+  filter: blur(8px);
+}
+
+.hero__content {
+  position: relative;
+  max-width: 520px;
+  display: grid;
+  gap: 10px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(28px, 4.5vw, 44px);
+}
+
+.hero p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.card {
+  padding: 18px;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 720px) {
+  .hero {
+    min-height: 260px;
+    padding: 28px;
+  }
+
+  .hero__circle {
+    width: 150px;
+    height: 150px;
+  }
+}

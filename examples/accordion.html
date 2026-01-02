@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accordion Example</title>
+  <link rel="stylesheet" href="./accordion.css">
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div class="brand">Support Desk</div>
+      <button class="button button--pill" type="button">Contact us</button>
+    </header>
+
+    <section class="hero">
+      <h1>Frequently asked questions</h1>
+      <p>Tap a question to expand the details with a smooth, reversible timeline.</p>
+    </section>
+
+    <div class="accordion">
+      <button class="accordion__item" data-acc>
+        <span>What does the setup include?</span>
+        <span class="accordion__chevron">›</span>
+        <div class="accordion__content">Each pattern ships with a focused module and a short integration guide.</div>
+      </button>
+      <button class="accordion__item" data-acc>
+        <span>How do I handle reduced motion?</span>
+        <span class="accordion__chevron">›</span>
+        <div class="accordion__content">Use GSAP matchMedia to swap animations for instant states.</div>
+      </button>
+      <button class="accordion__item" data-acc>
+        <span>Can I reuse the timeline?</span>
+        <span class="accordion__chevron">›</span>
+        <div class="accordion__content">Yes. Each item owns a reversible timeline for clean open/close.</div>
+      </button>
+    </div>
+  </div>
+
+  <script type="module" src="./accordion.js"></script>
+</body>
+</html>

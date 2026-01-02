@@ -470,7 +470,7 @@ function initAvatarStack() {
   });
 
   tl.to(avatars, {
-    x: (i) => (i + 1) * 36,
+    x: (i) => (i + 1) * 70,
     autoAlpha: 1,
     stagger: 0.05
   }, 0);

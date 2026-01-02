@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nav Drawer Example</title>
+  <link rel="stylesheet" href="./nav-drawer.css">
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div class="brand">Signal OS</div>
+      <button class="button button--pill" id="navToggle" type="button" aria-expanded="false">Open Menu</button>
+    </header>
+
+    <section class="hero">
+      <h1>Overlay navigation for focused flows.</h1>
+      <p>Use a timeline to open and close a lightweight drawer without layout shifts.</p>
+    </section>
+  </div>
+
+  <div class="nav">
+    <div class="nav__panel" aria-hidden="true">
+      <div class="nav__header">
+        <span class="nav__title">Menu</span>
+        <button class="button button--ghost" id="navClose" type="button">Close</button>
+      </div>
+      <ul class="nav__links">
+        <li>Overview</li>
+        <li>Projects</li>
+        <li>Integrations</li>
+        <li>Support</li>
+      </ul>
+    </div>
+  </div>
+
+  <script type="module" src="./nav-drawer.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap");
+
+:root {
+  --bg: #0c0f17;
+  --panel: #141a28;
+  --text: #eef1f7;
+  --muted: #a4aec2;
+  --accent: #7ad7ff;
+  --accent-2: #f2a3ff;
+  --radius: 16px;
+  --shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.page {
+  width: min(880px, 100%);
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+  display: grid;
+  gap: 20px;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.button {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button--pill {
+  background: linear-gradient(120deg, rgba(122, 215, 255, 0.2), rgba(242, 163, 255, 0.2));
+}
+
+.button--ghost {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.hero h1 {
+  margin: 0 0 8px;
+}
+
+.hero p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.modal__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal__panel {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: min(420px, 90vw);
+  padding: 18px;
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(40px);
+  pointer-events: none;
+}
+
+.modal__actions {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 720px) {
+  .modal__panel {
+    right: 16px;
+    left: 16px;
+    bottom: 16px;
+    width: auto;
+  }
+}

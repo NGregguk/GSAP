@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Parallax Example</title>
+  <link rel="stylesheet" href="./hero-parallax.css">
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div class="brand">Atlas Studio</div>
+      <button class="button button--pill" id="heroReset" type="button">Reset</button>
+    </header>
+
+    <section class="hero">
+      <div class="hero__bg"></div>
+      <div class="hero__circle"></div>
+      <div class="hero__content">
+        <p class="eyebrow">Interactive hero</p>
+        <h1>Guide visitors with depth.</h1>
+        <p>Subtle parallax layers respond to cursor movement to add focus without overwhelming the layout.</p>
+        <div class="hero__actions">
+          <button class="button button--pill" type="button">View case studies</button>
+          <button class="button button--ghost" type="button">Meet the team</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Why it works</h2>
+      <p>Use low-amplitude movement on background shapes and a slightly stronger response on the headline group.</p>
+    </section>
+  </div>
+
+  <script type="module" src="./hero-parallax.js"></script>
+</body>
+</html>

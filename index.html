@@ -17,6 +17,15 @@
         </div>
       </div>
     </div>
+    <div class="page-guide">
+      <p class="page-guide__title">How to use this page</p>
+      <ol class="page-guide__list">
+        <li>Read the Concept line to understand the idea.</li>
+        <li>Watch the Live demo to see it in motion.</li>
+        <li>Use Timeline state controls to explore.</li>
+        <li>Copy the Core prompt when you need the pattern.</li>
+      </ol>
+    </div>
     <header class="page__header page__header--hero">
       <div class="hero-shell">
         <div class="hero-copy">
@@ -101,7 +110,7 @@ tl.fromTo(".split span",
               <h4 class="setup-heading">Modules & structure</h4>
               <ul>
                 <li>Scripts use <code>type="module"</code>; animations are split into per-technique modules.</li>
-                <li>Controls on this page are demo-only—wire timelines to your own triggers in production.</li>
+                <li>Controls on this page are demo-only; wire timelines to your own triggers in production.</li>
               </ul>
               <h4 class="setup-heading">Motion defaults</h4>
               <ul>
@@ -122,15 +131,20 @@ gsap.registerPlugin(ScrollTrigger);</code></pre>
         </div>
       </div>
     </header>
+    <div class="lab-divider" aria-hidden="true">
+      <span class="lab-divider__label">Entering the lab</span>
+    </div>
 
     <section id="chars" class="panel panel--alt">
       <div class="panel__inner">
         <p class="eyebrow">Technique 1</p>
         <h2 class="panel__title">Character Split Stagger</h2>
-        <p class="panel__body">Manual split into characters; staggered entrance with transform-only motion for reversibility.</p>
+        <p class="panel__body"><strong>Concept:</strong> Split a line into characters and stagger them in for a clean, reversible reveal.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="demo">
           <div class="demo__text split" data-anim="chars">Craft responsive motion systems.</div>
         </div>
+        <p class="eyebrow">Timeline state</p>
         <div class="controls">
           <button data-action="play">Play</button>
           <button data-action="reverse">Reverse</button>
@@ -138,8 +152,8 @@ gsap.registerPlugin(ScrollTrigger);</code></pre>
         </div>
         <div class="meta">
           <div class="prompt-box">
-            <p class="prompt-box__title">Codex Prompt</p>
-            <p>Build a GSAP character split stagger: manually split the headline into chars and animate them in with transform-only y/opacity.</p>
+            <p class="prompt-box__title">Core prompt</p>
+            <p>Split the text into characters and stagger them in using only transforms and opacity for reversible motion.</p>
           </div>
           <details class="code-box">
             <summary>View JS for this animation</summary>
@@ -204,7 +218,7 @@ export { initSectionChars };</code></pre>
                 <li>Markup: <code>&lt;h2 class="my-headline"&gt;Your text here&lt;/h2&gt;</code></li>
                 <li>JS (module): <code>import { initSectionChars } from "./js/sections/sectionChars.js"; import "./js/gsapSetup.js";</code></li>
                 <li>Init after DOM ready: <code>initSectionChars(document.querySelector(".my-section"), false);</code> (pass your section or container)</li>
-                <li>Wire your own trigger: call the returned timeline’s <code>play()</code>/<code>reverse()</code> from your UI.</li>
+                <li>Wire your own trigger: call the returned timelines <code>play()</code>/<code>reverse()</code> from your UI.</li>
               </ol>
             </div>
           </details>
@@ -235,10 +249,12 @@ export { initSectionChars };</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Technique 2</p>
         <h2 class="panel__title">Word Split with Drift</h2>
-        <p class="panel__body">Words drift upward with light rotation; avoids layout properties to keep repaint cost low.</p>
+        <p class="panel__body"><strong>Concept:</strong> Stagger words with a slight lift so the line feels airy and guided.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="demo">
           <div class="demo__text split" data-anim="words">Text systems thrive on consistent easing.</div>
         </div>
+        <p class="eyebrow">Timeline state</p>
         <div class="controls">
           <button data-action="play">Play</button>
           <button data-action="reverse">Reverse</button>
@@ -246,8 +262,8 @@ export { initSectionChars };</code></pre>
         </div>
         <div class="meta">
           <div class="prompt-box">
-            <p class="prompt-box__title">Codex Prompt</p>
-            <p>Create a word-split drift: split the text into words and animate each upward with light rotation and opacity using transform-only properties.</p>
+            <p class="prompt-box__title">Core prompt</p>
+            <p>Split into words and stagger a soft upward drift using only transforms and opacity.</p>
           </div>
           <details class="code-box">
             <summary>View JS for this animation</summary>
@@ -313,7 +329,7 @@ export { initSectionWords };</code></pre>
                 <li>Markup: <code>&lt;p class="my-words"&gt;Your text here&lt;/p&gt;</code></li>
                 <li>JS (module): <code>import { initSectionWords } from "./js/sections/sectionWords.js"; import "./js/gsapSetup.js";</code></li>
                 <li>Init after DOM ready: <code>initSectionWords(document.querySelector(".my-section"), false);</code></li>
-                <li>Call the timeline’s controls from your own triggers to replay the drift when needed.</li>
+                <li>Call the timelines controls from your own triggers to replay the drift when needed.</li>
               </ol>
             </div>
           </details>
@@ -344,12 +360,14 @@ export { initSectionWords };</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Technique 3</p>
         <h2 class="panel__title">Masked Reveal</h2>
-        <p class="panel__body">Overflow-hidden wrapper keeps layout stable while text slides in via transforms.</p>
+        <p class="panel__body"><strong>Concept:</strong> Hide text behind a mask so it can slide in without shifting layout.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="demo demo--mask">
           <div class="mask">
             <div class="mask__inner" data-anim="mask">Measured movement prevents layout thrash.</div>
           </div>
         </div>
+        <p class="eyebrow">Timeline state</p>
         <div class="controls">
           <button data-action="play">Play</button>
           <button data-action="reverse">Reverse</button>
@@ -357,8 +375,8 @@ export { initSectionWords };</code></pre>
         </div>
         <div class="meta">
           <div class="prompt-box">
-            <p class="prompt-box__title">Codex Prompt</p>
-            <p>Implement a masked reveal: wrap the headline in an overflow-hidden container and slide the inner text up via yPercent/autoAlpha.</p>
+            <p class="prompt-box__title">Core prompt</p>
+            <p>Wrap text in an overflow-hidden mask and slide the inner line up with transforms and opacity.</p>
           </div>
           <details class="code-box">
             <summary>View JS for this animation</summary>
@@ -443,10 +461,12 @@ export { initSectionMask };</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Technique 4</p>
         <h2 class="panel__title">Scramble Reveal</h2>
-        <p class="panel__body">Simple scramble built on GSAP's ticker; reversible timeline controls start and finish.</p>
+        <p class="panel__body"><strong>Concept:</strong> Reveal the final message by resolving a temporary scrambled state over time.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="demo">
           <div class="demo__text" data-anim="scramble" aria-live="polite">Signal-ready strings arrive cleanly.</div>
         </div>
+        <p class="eyebrow">Timeline state</p>
         <div class="controls">
           <button data-action="play">Play</button>
           <button data-action="reverse">Reverse</button>
@@ -454,8 +474,8 @@ export { initSectionMask };</code></pre>
         </div>
         <div class="meta">
           <div class="prompt-box">
-            <p class="prompt-box__title">Codex Prompt</p>
-            <p>Write a GSAP-driven scramble reveal that replaces scrambled characters with the final string over time using a ticker-friendly callback.</p>
+            <p class="prompt-box__title">Core prompt</p>
+            <p>Scramble characters and progressively resolve them to the final string with timeline-driven progress.</p>
           </div>
           <details class="code-box">
             <summary>View JS for this animation</summary>
@@ -566,11 +586,13 @@ export { initSectionScramble };</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Technique 5</p>
         <h2 class="panel__title">Kinetic Highlight Sweep</h2>
-        <p class="panel__body">A tracked bar sweeps beneath the text while the headline lifts subtly.</p>
+        <p class="panel__body"><strong>Concept:</strong> Emphasize a line by moving a bar under it while the text stays legible.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="demo highlight">
           <span class="highlight__bar" aria-hidden="true"></span>
           <span class="highlight__text" data-anim="highlight">Underline motion as emphasis.</span>
         </div>
+        <p class="eyebrow">Timeline state</p>
         <div class="controls">
           <button data-action="play">Play</button>
           <button data-action="reverse">Reverse</button>
@@ -578,8 +600,8 @@ export { initSectionScramble };</code></pre>
         </div>
         <div class="meta">
           <div class="prompt-box">
-            <p class="prompt-box__title">Codex Prompt</p>
-            <p>Animate a kinetic highlight: sweep a bar under the text while the headline lifts slightly, using transform-only values.</p>
+            <p class="prompt-box__title">Core prompt</p>
+            <p>Animate a bar sweep under the text and lift the line slightly using transforms and opacity.</p>
           </div>
           <details class="code-box">
             <summary>View JS for this animation</summary>
@@ -673,10 +695,12 @@ export { initSectionHighlight };</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Technique 6</p>
         <h2 class="panel__title">3D Perspective Entrance</h2>
-        <p class="panel__body">Light rotateX/Y with perspective creates depth while respecting mobile performance.</p>
+        <p class="panel__body"><strong>Concept:</strong> Add depth by rotating text in 3D so it feels like it arrives from space.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="demo demo--perspective">
           <div class="demo__text" data-anim="perspective">Depth without layout cost.</div>
         </div>
+        <p class="eyebrow">Timeline state</p>
         <div class="controls">
           <button data-action="play">Play</button>
           <button data-action="reverse">Reverse</button>
@@ -684,8 +708,8 @@ export { initSectionHighlight };</code></pre>
         </div>
         <div class="meta">
           <div class="prompt-box">
-            <p class="prompt-box__title">Codex Prompt</p>
-            <p>Build a 3D-ish entrance: bring text forward with light rotateX/rotateY and yPercent while keeping it performant.</p>
+            <p class="prompt-box__title">Core prompt</p>
+            <p>Rotate characters in 3D with a gentle lift and fade to create depth.</p>
           </div>
           <details class="code-box">
             <summary>View JS for this animation</summary>
@@ -779,10 +803,12 @@ export { initSectionPerspective };</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Technique 7</p>
         <h2 class="panel__title">Wave Stagger</h2>
-        <p class="panel__body">Function-based stagger creates a ripple across characters with consistent easing.</p>
+        <p class="panel__body"><strong>Concept:</strong> Create a ripple by offsetting each characters timing in a wave.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="demo">
           <div class="demo__text split" data-anim="wave">Organic waves feel procedural.</div>
         </div>
+        <p class="eyebrow">Timeline state</p>
         <div class="controls">
           <button data-action="play">Play</button>
           <button data-action="reverse">Reverse</button>
@@ -790,8 +816,8 @@ export { initSectionPerspective };</code></pre>
         </div>
         <div class="meta">
           <div class="prompt-box">
-            <p class="prompt-box__title">Codex Prompt</p>
-            <p>Make a character-split wave: use function-based stagger to create an organic ripple with transform/opacity only.</p>
+            <p class="prompt-box__title">Core prompt</p>
+            <p>Stagger characters with a wave-like timing curve to create a ripple across the line.</p>
           </div>
           <details class="code-box">
             <summary>View JS for this animation</summary>
@@ -885,13 +911,15 @@ export { initSectionWave };</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Technique 8</p>
         <h2 class="panel__title">Rolling Counter</h2>
-        <p class="panel__body">Numeric text ticks upward with snapping and an accessible label.</p>
+        <p class="panel__body"><strong>Concept:</strong> Make number changes feel smooth by animating the value, not the layout.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="demo demo--counter">
           <div class="counter">
             <span class="counter__label">Downloads</span>
             <span class="counter__value" data-anim="counter" aria-live="polite">0</span>
           </div>
         </div>
+        <p class="eyebrow">Timeline state</p>
         <div class="controls">
           <button data-action="play">Play</button>
           <button data-action="reverse">Reverse</button>
@@ -899,8 +927,8 @@ export { initSectionWave };</code></pre>
         </div>
         <div class="meta">
           <div class="prompt-box">
-            <p class="prompt-box__title">Codex Prompt</p>
-            <p>Animate a rolling counter: tween numbers upward with snapping while keeping the text accessible.</p>
+            <p class="prompt-box__title">Core prompt</p>
+            <p>Tween a number upward and update the text each tick for a smooth count.</p>
           </div>
           <details class="code-box">
             <summary>View JS for this animation</summary>
@@ -998,10 +1026,12 @@ export { initSectionCounter };</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Technique 9</p>
         <h2 class="panel__title">3D Flip Cascade</h2>
-        <p class="panel__body">Characters flip up on the Y axis with staggered depth—fast, transform-only entrance.</p>
+        <p class="panel__body"><strong>Concept:</strong> Flip characters in sequence to create a cascading reveal with depth.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="demo">
           <div class="demo__text split" data-anim="flip">Flip each character with ease.</div>
         </div>
+        <p class="eyebrow">Timeline state</p>
         <div class="controls">
           <button data-action="play">Play</button>
           <button data-action="reverse">Reverse</button>
@@ -1009,8 +1039,8 @@ export { initSectionCounter };</code></pre>
         </div>
         <div class="meta">
           <div class="prompt-box">
-            <p class="prompt-box__title">Codex Prompt</p>
-            <p>Create a character flip cascade: split text into chars and flip each in on rotateY with a stagger, using transform-only values.</p>
+            <p class="prompt-box__title">Core prompt</p>
+            <p>Rotate characters on the Y axis with a stagger for a flip-in cascade.</p>
           </div>
           <details class="code-box">
             <summary>View JS for this animation</summary>
@@ -1095,13 +1125,15 @@ export { initSectionFlip };</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Technique 10</p>
         <h2 class="panel__title">Duotone Slide</h2>
-        <p class="panel__body">Foreground text lifts while a ghost layer slides in offset for a duotone accent.</p>
+        <p class="panel__body"><strong>Concept:</strong> Layer a ghost copy to add depth and color separation behind the main text.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="demo demo--duotone">
           <div class="duotone">
             <span class="duotone__ghost" aria-hidden="true">Duotone motion layers.</span>
             <span class="duotone__main" data-anim="duotone">Duotone motion layers.</span>
           </div>
         </div>
+        <p class="eyebrow">Timeline state</p>
         <div class="controls">
           <button data-action="play">Play</button>
           <button data-action="reverse">Reverse</button>
@@ -1109,8 +1141,8 @@ export { initSectionFlip };</code></pre>
         </div>
         <div class="meta">
           <div class="prompt-box">
-            <p class="prompt-box__title">Codex Prompt</p>
-            <p>Animate a duotone text pair: slide in a ghost layer with offset/opacity while the main text lifts slightly using transform/opacity only.</p>
+            <p class="prompt-box__title">Core prompt</p>
+            <p>Animate a ghost layer offset while the main text lifts using transforms and opacity.</p>
           </div>
           <details class="code-box">
             <summary>View JS for this animation</summary>
@@ -1191,10 +1223,12 @@ export { initSectionDuotone };</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Technique 11</p>
         <h2 class="panel__title">Bounce Lift</h2>
-        <p class="panel__body">Characters pop upward with a soft back-out ease for playful emphasis.</p>
+        <p class="panel__body"><strong>Concept:</strong> Use a soft bounce to add playful emphasis on entry.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="demo">
           <div class="demo__text split" data-anim="bounce">Bounce into view with ease.</div>
         </div>
+        <p class="eyebrow">Timeline state</p>
         <div class="controls">
           <button data-action="play">Play</button>
           <button data-action="reverse">Reverse</button>
@@ -1202,8 +1236,8 @@ export { initSectionDuotone };</code></pre>
         </div>
         <div class="meta">
           <div class="prompt-box">
-            <p class="prompt-box__title">Codex Prompt</p>
-            <p>Create a GSAP character bounce: split text into chars and pop them in with a back-out ease using transform-only y/scale/opacity.</p>
+            <p class="prompt-box__title">Core prompt</p>
+            <p>Stagger characters with a back-out ease using transform, scale, and opacity.</p>
           </div>
           <details class="code-box">
             <summary>View JS for this animation</summary>
@@ -1288,13 +1322,15 @@ export { initSectionBounce };</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Technique 12</p>
         <h2 class="panel__title">Offset Shadow Slide</h2>
-        <p class="panel__body">A shadow clone slides into place under the text for dimensional emphasis.</p>
+        <p class="panel__body"><strong>Concept:</strong> Use an offset clone to create a dimensional shadow that settles in.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="demo demo--shadow">
           <div class="shadow">
             <span class="shadow__clone" aria-hidden="true">Shadowed emphasis text.</span>
             <span class="shadow__main" data-anim="shadow">Shadowed emphasis text.</span>
           </div>
         </div>
+        <p class="eyebrow">Timeline state</p>
         <div class="controls">
           <button data-action="play">Play</button>
           <button data-action="reverse">Reverse</button>
@@ -1302,8 +1338,8 @@ export { initSectionBounce };</code></pre>
         </div>
         <div class="meta">
           <div class="prompt-box">
-            <p class="prompt-box__title">Codex Prompt</p>
-            <p>Animate a text + shadow pair: slide an offset clone into place while lifting the main text with opacity.</p>
+            <p class="prompt-box__title">Core prompt</p>
+            <p>Slide a clone into place while the main text lifts for dimensional emphasis.</p>
           </div>
           <details class="code-box">
             <summary>View JS for this animation</summary>
@@ -1384,10 +1420,12 @@ export { initSectionShadow };</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Technique 13</p>
         <h2 class="panel__title">Glow Trail Rise</h2>
-        <p class="panel__body">Characters rise with a soft neon trail that fades as they settle.</p>
+        <p class="panel__body"><strong>Concept:</strong> Add a brief glow trail as characters rise to spotlight the reveal.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="demo demo--glow">
           <div class="demo__text split" data-anim="glow">Glow into position.</div>
         </div>
+        <p class="eyebrow">Timeline state</p>
         <div class="controls">
           <button data-action="play">Play</button>
           <button data-action="reverse">Reverse</button>
@@ -1395,8 +1433,8 @@ export { initSectionShadow };</code></pre>
         </div>
         <div class="meta">
           <div class="prompt-box">
-            <p class="prompt-box__title">Codex Prompt</p>
-            <p>Create a neon glow rise: split characters and animate them up with a text-shadow bloom as they appear.</p>
+            <p class="prompt-box__title">Core prompt</p>
+            <p>Stagger characters up while boosting text-shadow glow for a trail.</p>
           </div>
           <details class="code-box">
             <summary>View JS for this animation</summary>
@@ -1485,10 +1523,12 @@ export { initSectionGlowTrail };</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Technique 14</p>
         <h2 class="panel__title">Skew Slide In</h2>
-        <p class="panel__body">A sheared entrance that snaps to neutral for a crisp arrival.</p>
+        <p class="panel__body"><strong>Concept:</strong> Shear the text in, then settle it to a clean, straight finish.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="demo demo--skew">
           <div class="demo__text" data-anim="skew">Sheared then steady.</div>
         </div>
+        <p class="eyebrow">Timeline state</p>
         <div class="controls">
           <button data-action="play">Play</button>
           <button data-action="reverse">Reverse</button>
@@ -1496,8 +1536,8 @@ export { initSectionGlowTrail };</code></pre>
         </div>
         <div class="meta">
           <div class="prompt-box">
-            <p class="prompt-box__title">Codex Prompt</p>
-            <p>Shear text in with a skewed slide, then settle to neutral for a clean lock-up.</p>
+            <p class="prompt-box__title">Core prompt</p>
+            <p>Skew and slide text in, then settle to neutral with opacity.</p>
           </div>
           <details class="code-box">
             <summary>View JS for this animation</summary>
@@ -1573,8 +1613,20 @@ export { initSectionSkewSlide };</code></pre>
   </main>
 
   <button class="back-to-top" type="button" aria-label="Back to top">
-    ↑ Top
+     Top
   </button>
   <script type="module" src="./main.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

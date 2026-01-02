@@ -17,6 +17,15 @@
         </div>
       </div>
     </div>
+    <div class="page-guide">
+      <p class="page-guide__title">How to use this page</p>
+      <ol class="page-guide__list">
+        <li>Read the Concept line to understand the idea.</li>
+        <li>Watch the Live demo to see it in motion.</li>
+        <li>Use the Interaction area to explore states.</li>
+        <li>Copy the Core prompt when you need the pattern.</li>
+      </ol>
+    </div>
     <header class="page__header page__header--hero">
       <div class="hero-shell">
         <div class="hero-copy">
@@ -34,7 +43,7 @@
           <div class="hero-meta">
             <div class="meta-block">
               <p class="meta-label">Patterns</p>
-              <p class="meta-value">7</p>
+              <p class="meta-value">20</p>
               <p class="meta-desc">Hero, nav, cards, modal</p>
             </div>
             <div class="meta-block">
@@ -101,7 +110,7 @@ const toggle = () => (tl.reversed() || tl.progress() === 0 ? tl.play() : tl.reve
               <h4 class="setup-heading">Modules & structure</h4>
               <ul>
                 <li>Scripts use <code>type="module"</code>; patterns are split into modules.</li>
-                <li>Controls here are demo-only—wire timelines to your app state in production.</li>
+                <li>Controls here are demo-only; wire timelines to your app state in production.</li>
               </ul>
               <h4 class="setup-heading">Motion defaults</h4>
               <ul>
@@ -122,14 +131,19 @@ gsap.registerPlugin(ScrollTrigger);</code></pre>
         </div>
       </div>
     </header>
+    <div class="lab-divider" aria-hidden="true">
+      <span class="lab-divider__label">Entering the lab</span>
+    </div>
 
     <section class="panel panel--alt" id="hero">
       <div class="panel__inner">
         <p class="eyebrow">Pattern 1</p>
         <h2 class="panel__title">Hero Parallax Focus</h2>
-        <p class="panel__body">Mouse/touch move drives a lightweight parallax group with reset control.</p>
+        <p class="panel__body"><strong>Concept:</strong> Move layered elements at different speeds to create depth tied to input.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
-          <div class="pattern-main">
+        <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <div class="hero">
               <div class="hero__bg"></div>
               <div class="hero__circle"></div>
@@ -142,6 +156,10 @@ gsap.registerPlugin(ScrollTrigger);</code></pre>
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Create a lightweight parallax state driven by pointer input, then reset to neutral when you leave or tap reset.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const hero = document.querySelector(".hero");
@@ -169,6 +187,7 @@ hero.addEventListener("pointerleave", () =&gt; gsap.to([circle,content,bg], { x:
                   <li>Import <code>initHero</code> (bundled via <code>ui.js</code>) and call after DOM ready; no ScrollTrigger needed.</li>
                   <li>Add a reset button if you want manual neutral state; otherwise pointerleave handles it.</li>
                   <li>Serve over HTTP(S) so the ES module imports resolve correctly.</li>
+                  <li>Example page: <a href="./examples/hero-parallax.html">Hero parallax layout</a></li>
                 </ul>
               </div>
             </details>
@@ -197,9 +216,11 @@ gsap.to(bg,     { x: x * 8,  y: y * 6  });</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Pattern 2</p>
         <h2 class="panel__title">Nav Drawer</h2>
-        <p class="panel__body">Timeline-as-state-machine for an overlay nav, reversible via the toggle.</p>
+        <p class="panel__body"><strong>Concept:</strong> Treat the drawer as a reversible overlay that slides in and out.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
-          <div class="pattern-main">
+        <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <button id="navToggle" class="button button--pill" aria-expanded="false">Open Menu</button>
             <div class="nav">
               <div class="nav__panel">
@@ -218,6 +239,10 @@ gsap.to(bg,     { x: x * 8,  y: y * 6  });</code></pre>
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Create a paused GSAP timeline to open the drawer and reverse it to close, controlling visibility and pointer-events from the same timeline.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const panel = document.querySelector(".nav__panel");
@@ -238,6 +263,7 @@ navClose.addEventListener("click", () =&gt; tl.reverse());</code></pre>
                   <li>Init: import <code>initNav</code> (via <code>ui.js</code>) and call after DOM ready.</li>
                   <li>State: the timeline controls all motion; drive it from your own toggles if you change button IDs.</li>
                   <li>Pointer safety: panel starts with <code>pointer-events:none</code>; timeline sets it to auto on open.</li>
+                  <li>Example page: <a href="./examples/nav-drawer.html">Nav drawer layout</a></li>
                 </ul>
               </div>
             </details>
@@ -266,9 +292,11 @@ navClose.addEventListener("click", () =&gt; tl.reverse());</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Pattern 3</p>
         <h2 class="panel__title">Card Hover Lift</h2>
-        <p class="panel__body">Hover/focus timelines lift cards with staggered overlay hints.</p>
+        <p class="panel__body"><strong>Concept:</strong> Add depth by lifting cards on hover or focus.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <div class="card-grid">
               <article class="card">
                 <div class="card__meta">Signal</div>
@@ -289,6 +317,10 @@ navClose.addEventListener("click", () =&gt; tl.reverse());</code></pre>
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Use a paused timeline that plays on hover or focus and reverses on leave, so the card returns to its base state.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const tl = gsap.timeline({ paused:true, defaults:{ ease: Motion.ease.out, duration: Motion.duration.sm }});
@@ -306,6 +338,7 @@ card.addEventListener("blur", () =&gt; tl.reverse());</code></pre>
                   <li>Markup: use <code>.card</code> elements with the provided ::after overlay (already in CSS).</li>
                   <li>Init: import <code>initCards</code> (via <code>ui.js</code>) and call after DOM ready.</li>
                   <li>Access: hover/focus both drive the timeline; keep semantic elements for keyboard users.</li>
+                  <li>Example page: <a href="./examples/card-hover.html">Card grid layout</a></li>
                 </ul>
               </div>
             </details>
@@ -334,29 +367,35 @@ card.addEventListener("blur", () =&gt; tl.reverse());</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Pattern 4</p>
         <h2 class="panel__title">Accordion State</h2>
-        <p class="panel__body">Each item owns a reversible timeline; only one open at a time.</p>
+        <p class="panel__body"><strong>Concept:</strong> Reveal one item at a time with a reversible open/close.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <div class="accordion">
               <button class="accordion__item" data-acc>
                 <span>Performance</span>
-                <span class="accordion__chevron">›</span>
+                <span class="accordion__chevron"></span>
                 <div class="accordion__content">Transforms + opacity keep frames smooth; avoid layout properties.</div>
               </button>
               <button class="accordion__item" data-acc>
                 <span>Cleanup</span>
-                <span class="accordion__chevron">›</span>
+                <span class="accordion__chevron"></span>
                 <div class="accordion__content">Kill timelines on teardown to prevent ghost styles.</div>
               </button>
               <button class="accordion__item" data-acc>
                 <span>Accessibility</span>
-                <span class="accordion__chevron">›</span>
+                <span class="accordion__chevron"></span>
                 <div class="accordion__content">Honor prefers-reduced-motion; keep focus states intact.</div>
               </button>
             </div>
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Give each item its own timeline and only keep one open by reversing the others on click.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const tl = gsap.timeline({ paused: true, defaults:{ ease: Motion.ease.out, duration: Motion.duration.sm } })
@@ -378,6 +417,7 @@ item.addEventListener("click", () =&gt; {
                   <li>Markup: each accordion trigger has <code>data-acc</code>, contains a <code>.accordion__content</code> and <code>.accordion__chevron</code>.</li>
                   <li>Init: import <code>initAccordion</code> and call after DOM ready.</li>
                   <li>Behavior: one-open-at-a-time handled in JS; keep triggers as buttons for accessibility.</li>
+                  <li>Example page: <a href="./examples/accordion.html">FAQ accordion layout</a></li>
                 </ul>
               </div>
             </details>
@@ -406,9 +446,11 @@ item.addEventListener("click", () =&gt; {
       <div class="panel__inner">
         <p class="eyebrow">Pattern 5</p>
         <h2 class="panel__title">Modal Fly + Dim</h2>
-        <p class="panel__body">Modal timeline handles dimmer + panel; reversible for close.</p>
+        <p class="panel__body"><strong>Concept:</strong> Sync overlay and panel so open and close feel unified.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <button id="modalOpen" class="button button--pill">Open Modal</button>
             <div class="modal" aria-hidden="true">
               <div class="modal__overlay"></div>
@@ -421,6 +463,10 @@ item.addEventListener("click", () =&gt; {
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Control the overlay and panel with one timeline so opening and closing stay perfectly in sync.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const tl = gsap.timeline({ paused:true, defaults:{ ease: Motion.ease.out, duration: Motion.duration.md }})
@@ -438,6 +484,7 @@ overlay.addEventListener("click", () =&gt; tl.reverse());</code></pre>
                   <li>Markup: overlay + panel inside <code>.modal</code>; provide open/close buttons.</li>
                   <li>Init: import <code>initModal</code> and call after DOM ready; timeline manages both overlay and panel.</li>
                   <li>Close hooks: overlay click and close button both reverse the timeline.</li>
+                  <li>Example page: <a href="./examples/modal-fly.html">Modal layout</a></li>
                 </ul>
               </div>
             </details>
@@ -466,9 +513,11 @@ overlay.addEventListener("click", () =&gt; tl.reverse());</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Pattern 6</p>
         <h2 class="panel__title">Button Microinteraction</h2>
-        <p class="panel__body">Press/release timeline adds tactile depth and ripple highlight.</p>
+        <p class="panel__body"><strong>Concept:</strong> Use press feedback to make buttons feel physical.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <button class="button button--micro" id="microBtn">
               <span class="button__ripple"></span>
               Deploy
@@ -476,6 +525,10 @@ overlay.addEventListener("click", () =&gt; tl.reverse());</code></pre>
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Restart a short press timeline on pointer down to deliver a consistent tactile state.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const tl = gsap.timeline({ paused:true, defaults:{ ease: Motion.ease.out }});
@@ -520,9 +573,11 @@ btn.addEventListener("pointerdown", () =&gt; tl.restart());</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Pattern 7</p>
         <h2 class="panel__title">Progress Loader</h2>
-        <p class="panel__body">Looping loader timeline with reversible completion state.</p>
+        <p class="panel__body"><strong>Concept:</strong> Loop progress while allowing a clean finish state.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <div class="loader">
               <div class="loader__track">
                 <div class="loader__bar" aria-hidden="true"></div>
@@ -537,6 +592,10 @@ btn.addEventListener("pointerdown", () =&gt; tl.restart());</code></pre>
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Loop the loader timeline for the loading state, then switch to a completion state before resetting.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const loopTl = gsap.timeline({ repeat:-1, paused:true, defaults:{ ease:"none" }})
@@ -582,14 +641,20 @@ const reset = () =&gt; { loopTl.pause(0); gsap.set(bar,{ xPercent:-100, width:"3
       <div class="panel__inner">
         <p class="eyebrow">Pattern 8</p>
         <h2 class="panel__title">Toast Notification Stack</h2>
-        <p class="panel__body">Trigger a toast that slides in, auto-closes, and keeps the stack tidy.</p>
+        <p class="panel__body"><strong>Concept:</strong> Deliver short updates that auto-dismiss from a stack.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <button id="toastTrigger" class="button button--pill">Show toast</button>
             <div class="toast-stack" aria-live="polite"></div>
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Create a toast, animate it in, and auto-dismiss it so the stack stays tidy.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const stack = document.querySelector(".toast-stack");
@@ -637,9 +702,11 @@ const addToast = () =&gt; {
       <div class="panel__inner">
         <p class="eyebrow">Pattern 9</p>
         <h2 class="panel__title">Tabbed Content Slide</h2>
-        <p class="panel__body">Tabs swap content with an underline glide and a quick fade/slide.</p>
+        <p class="panel__body"><strong>Concept:</strong> Move one indicator to show the active view.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <div class="tabs">
               <div class="tabs__list" role="tablist">
                 <button class="tabs__tab is-active" data-tab="design" role="tab" aria-selected="true">Design</button>
@@ -665,6 +732,10 @@ const addToast = () =&gt; {
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Move a single indicator to the active tab and swap the panel state on each click.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const tabs = gsap.utils.toArray(".tabs__tab");
@@ -714,9 +785,11 @@ const activate = (name) =&gt; {
       <div class="panel__inner">
         <p class="eyebrow">Pattern 10</p>
         <h2 class="panel__title">Toggle Switch Snap</h2>
-        <p class="panel__body">A pill switch that snaps the thumb with a quick bounce and updates the label.</p>
+        <p class="panel__body"><strong>Concept:</strong> Snap a toggle to communicate on/off state.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <button class="switch" type="button" aria-pressed="false">
               <span class="switch__label">Off</span>
               <span class="switch__thumb"></span>
@@ -724,6 +797,10 @@ const activate = (name) =&gt; {
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Toggle a single on/off state and update the label to match the current position.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const toggle = () =&gt; {
@@ -768,9 +845,11 @@ const activate = (name) =&gt; {
       <div class="panel__inner">
         <p class="eyebrow">Pattern 11</p>
         <h2 class="panel__title">Tooltip Rise</h2>
-        <p class="panel__body">Hover or focus shows a floating tooltip that rises and fades in.</p>
+        <p class="panel__body"><strong>Concept:</strong> Reveal helper text on hover or focus without shifting layout.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <button class="button button--ghost tooltip-target" aria-describedby="tip-demo">
               Hover for details
               <span class="tooltip" role="tooltip" id="tip-demo">This tooltip uses transform + opacity only.</span>
@@ -778,6 +857,10 @@ const activate = (name) =&gt; {
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Show the tooltip on hover or focus and hide it on leave or blur to keep the layout stable.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const show = () =&gt; gsap.to(tip, { autoAlpha: 1, y: -6, duration: Motion.duration.sm });
@@ -822,20 +905,26 @@ target.addEventListener("blur", hide);</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Pattern 12</p>
         <h2 class="panel__title">FAB Fan Menu</h2>
-        <p class="panel__body">A floating action button fans out quick actions, reversible with a tap.</p>
+        <p class="panel__body"><strong>Concept:</strong> Expand one primary action into a fan of quick actions.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <div class="fab">
               <button class="fab__main" aria-expanded="false">+</button>
               <div class="fab__actions">
-                <button class="fab__action" aria-label="Share">↗</button>
-                <button class="fab__action" aria-label="Star">★</button>
-                <button class="fab__action" aria-label="Download">⇩</button>
+                <button class="fab__action" aria-label="Share"></button>
+                <button class="fab__action" aria-label="Star"></button>
+                <button class="fab__action" aria-label="Download"></button>
               </div>
             </div>
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Toggle a single timeline to fan actions out and reverse it to collapse the stack.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const tl = gsap.timeline({ paused:true, defaults:{ duration: Motion.duration.sm, ease: Motion.ease.out }});
@@ -878,18 +967,24 @@ main.addEventListener("click", () =&gt; tl.reversed() || tl.progress() === 0 ? t
       <div class="panel__inner">
         <p class="eyebrow">Pattern 13</p>
         <h2 class="panel__title">Search Field Focus</h2>
-        <p class="panel__body">A focused input with a glow underline and a clear button that fades in.</p>
+        <p class="panel__body"><strong>Concept:</strong> Highlight focus to guide input and clear it easily.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <div class="search">
-              <span class="search__icon" aria-hidden="true">⌕</span>
+              <span class="search__icon" aria-hidden="true"></span>
               <input class="search__input" type="text" placeholder="Search patterns" aria-label="Search patterns" />
-              <button class="search__clear" type="button" aria-label="Clear search">×</button>
+              <button class="search__clear" type="button" aria-label="Clear search"></button>
               <span class="search__underline" aria-hidden="true"></span>
             </div>
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Highlight the focused state with an underline and show clear controls only when needed.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const input = document.querySelector(".search__input");
@@ -936,16 +1031,22 @@ clear.addEventListener("click", () =&gt; { input.value = ""; input.focus(); });<
       <div class="panel__inner">
         <p class="eyebrow">Pattern 14</p>
         <h2 class="panel__title">Notification Bell Ping</h2>
-        <p class="panel__body">Tap the bell to shake and ping the badge with a soft pulse.</p>
+        <p class="panel__body"><strong>Concept:</strong> Use a shake and pulse to draw attention to updates.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <button class="bell" type="button" aria-label="Notifications">
-              <span class="bell__icon">🔔</span>
+              <span class="bell__icon"></span>
               <span class="bell__badge" aria-hidden="true">3</span>
             </button>
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Trigger a short attention state on click with a shake and badge pulse.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const bell = document.querySelector(".bell");
@@ -990,9 +1091,11 @@ bell.addEventListener("click", () =&gt; {
       <div class="panel__inner">
         <p class="eyebrow">Pattern 15</p>
         <h2 class="panel__title">Stepper Progress Rail</h2>
-        <p class="panel__body">Move through steps with a sliding indicator and active label.</p>
+        <p class="panel__body"><strong>Concept:</strong> Show progress by sliding a single indicator between steps.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <div class="stepper">
               <div class="stepper__track" role="tablist">
                 <button class="stepper__step is-active" data-step="0" role="tab" aria-selected="true">Plan</button>
@@ -1012,6 +1115,10 @@ bell.addEventListener("click", () =&gt; {
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Advance a single active state and slide the indicator to match the current step.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const steps = gsap.utils.toArray(".stepper__step");
@@ -1058,9 +1165,11 @@ const setStep = (index) =&gt; {
       <div class="panel__inner">
         <p class="eyebrow">Pattern 16</p>
         <h2 class="panel__title">Stats Reveal Stack</h2>
-        <p class="panel__body">Reveal a short list with a staggered lift and fade.</p>
+        <p class="panel__body"><strong>Concept:</strong> Reveal stats with a short stagger for readable emphasis.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <div class="stats-card">
               <div class="stats-card__header">
                 <p class="stats-card__title">Weekly snapshot</p>
@@ -1075,6 +1184,10 @@ const setStep = (index) =&gt; {
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Play a staggered reveal timeline to show the list, then reverse to hide it cleanly.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const items = gsap.utils.toArray(".stats-item");
@@ -1117,9 +1230,11 @@ button.addEventListener("click", () =&gt; tl.reversed() ? tl.play() : tl.reverse
       <div class="panel__inner">
         <p class="eyebrow">Pattern 17</p>
         <h2 class="panel__title">Filter Chip Toggle</h2>
-        <p class="panel__body">Select a filter with a sliding chip highlight and label update.</p>
+        <p class="panel__body"><strong>Concept:</strong> Use a sliding pill to show the active filter.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <div class="chip-group" role="tablist">
               <button class="chip is-active" data-chip="All" role="tab" aria-selected="true">All</button>
               <button class="chip" data-chip="UI" role="tab" aria-selected="false">UI</button>
@@ -1131,6 +1246,10 @@ button.addEventListener("click", () =&gt; tl.reversed() ? tl.play() : tl.reverse
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Move one highlight to the selected chip and update the active filter label.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const chips = gsap.utils.toArray(".chip");
@@ -1177,9 +1296,11 @@ const activate = (chip) =&gt; {
       <div class="panel__inner">
         <p class="eyebrow">Pattern 18</p>
         <h2 class="panel__title">Inline Banner Slide</h2>
-        <p class="panel__body">Reveal a dismissible banner with a smooth slide and fade.</p>
+        <p class="panel__body"><strong>Concept:</strong> Slide a banner in and out to announce updates.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <button class="button button--pill" data-banner="show">Show banner</button>
             <div class="banner" role="status" aria-live="polite">
               <div class="banner__content">
@@ -1191,6 +1312,10 @@ const activate = (chip) =&gt; {
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Use a simple show/hide timeline so the banner slides in and reverses out on dismiss.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const banner = document.querySelector(".banner");
@@ -1234,19 +1359,26 @@ closeBtn.addEventListener("click", () =&gt; tl.reverse());</code></pre>
       <div class="panel__inner">
         <p class="eyebrow">Pattern 19</p>
         <h2 class="panel__title">Avatar Stack Expand</h2>
-        <p class="panel__body">Tap the stack to fan avatars outward and reveal names.</p>
+        <p class="panel__body"><strong>Concept:</strong> Fan a stacked group to reveal the team.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <button class="avatar-stack" type="button" aria-expanded="false">
               <span class="avatar" data-name="Ava"></span>
               <span class="avatar" data-name="Noah"></span>
               <span class="avatar" data-name="Mia"></span>
               <span class="avatar" data-name="Leo"></span>
-              <span class="avatar-label">Team</span>
+              <span class="avatar" data-name="Neil"></span>
+              <span class="avatar-label"></span>
             </button>
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Toggle a timeline that fans avatars out for detail and reverses to the stacked state.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const stack = document.querySelector(".avatar-stack");
@@ -1262,6 +1394,7 @@ stack.addEventListener("click", () =&gt; tl.reversed() || tl.progress() === 0 ? 
                   <li>Use a <code>.avatar-stack</code> button with multiple <code>.avatar</code> spans.</li>
                   <li>Import <code>initAvatarStack</code> (via <code>ui.js</code>) and call after DOM ready.</li>
                   <li>Click toggles the fan and updates <code>aria-expanded</code>.</li>
+                  <li>Example page: <a href="./examples/avatar-stack.html">Avatar stack expand layout</a></li>
                 </ul>
               </div>
             </details>
@@ -1290,9 +1423,11 @@ stack.addEventListener("click", () =&gt; tl.reversed() || tl.progress() === 0 ? 
       <div class="panel__inner">
         <p class="eyebrow">Pattern 20</p>
         <h2 class="panel__title">Command Palette Slide</h2>
-        <p class="panel__body">Open a lightweight command palette with a top slide and staggered list.</p>
+        <p class="panel__body"><strong>Concept:</strong> Slide in a quick command surface with a staggered list.</p>
+        <p class="eyebrow">Live demo</p>
         <div class="pattern-grid">
           <div class="pattern-main">
+            <p class="eyebrow">Interaction</p>
             <button class="button button--pill" data-palette="open">Open palette</button>
             <div class="palette" aria-hidden="true">
               <div class="palette__panel" role="dialog" aria-label="Command palette">
@@ -1309,6 +1444,10 @@ stack.addEventListener("click", () =&gt; tl.reversed() || tl.progress() === 0 ? 
           </div>
           <div class="meta-stack">
             <p class="meta-stack__title">Implementation Notes</p>
+            <div class=\"core-pattern\">
+              <p class=\"core-pattern__title\">Core pattern</p>
+              <p class=\"core-pattern__body\">Open a command surface with a slide-in timeline and close it by reversing the same timeline.</p>
+            </div>
             <details class="code-box">
               <summary>View JS for this pattern</summary>
               <pre><code>const tl = gsap.timeline({ paused: true, defaults: { duration: Motion.duration.sm, ease: Motion.ease.out }});
@@ -1348,8 +1487,20 @@ tl.fromTo(panel, { y: -20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, pointerEvents: 
   </main>
 
   <button class="back-to-top" type="button" aria-label="Back to top">
-    ↑ Top
+     Top
   </button>
   <script type="module" src="./ui.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

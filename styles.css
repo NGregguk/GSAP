@@ -119,6 +119,29 @@ body.leaving .page {
   flex-wrap: wrap;
 }
 
+.page-guide {
+  width: min(1080px, 100%);
+  margin: 12px auto 8px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.page-guide__title {
+  margin: 0 0 6px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.page-guide__list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 13px;
+}
+
 .page__header--hero {
   background: radial-gradient(circle at 20% 20%, rgba(122, 215, 255, 0.12), transparent 32%),
               radial-gradient(circle at 80% 40%, rgba(242, 163, 255, 0.14), transparent 30%),
@@ -136,7 +159,7 @@ body.leaving .page {
   border-radius: 0 0 20px 20px;
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
-  margin-bottom: 28px;
+  margin-bottom: 40px;
 }
 
 .page__header--hero::before,
@@ -523,8 +546,10 @@ details.cdn-box pre {
   gap: 14px;
   padding: 18px;
   border-radius: var(--radius);
-  background: var(--panel);
-  box-shadow: var(--shadow);
+  background: linear-gradient(160deg, rgba(122, 215, 255, 0.08), rgba(242, 163, 255, 0.06)),
+              var(--panel);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .demo__text {
@@ -613,14 +638,15 @@ button:focus-visible {
 .meta {
   margin-top: 14px;
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 .prompt-box {
   padding: 14px;
   border-radius: var(--radius);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(122, 215, 255, 0.25);
+  background: linear-gradient(120deg, rgba(122, 215, 255, 0.12), rgba(242, 163, 255, 0.08));
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25);
 }
 
 .prompt-box__title {
@@ -653,7 +679,7 @@ details.code-box pre {
   overflow-x: auto;
   font-size: 12px;
   line-height: 1.5;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.16);
 }
 
 details.code-box code {
@@ -666,7 +692,7 @@ details.code-box code {
   line-height: 1.6;
   font-size: 14px;
   color: var(--muted);
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.16);
 }
 
 .code-box summary {
@@ -830,6 +856,33 @@ details.code-box code {
     right: 14px;
     bottom: 14px;
   }
+}
+
+.lab-divider {
+  width: min(1080px, 100%);
+  margin: 0 auto 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 11px;
+}
+
+.lab-divider::before,
+.lab-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, rgba(122, 215, 255, 0.2), rgba(242, 163, 255, 0.2));
+}
+
+.lab-divider__label {
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 @media (max-width: 960px) {

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Hover Example</title>
+  <link rel="stylesheet" href="./card-hover.css">
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div class="brand">Launchboard</div>
+      <button class="button button--pill" type="button">Create report</button>
+    </header>
+
+    <section class="hero">
+      <h1>Daily insights</h1>
+      <p>Hover or focus cards to reveal depth and highlights.</p>
+    </section>
+
+    <section class="card-grid">
+      <article class="card">
+        <p class="card__eyebrow">Growth</p>
+        <h3>Weekly active</h3>
+        <p class="card__copy">+12.4% from last week.</p>
+      </article>
+      <article class="card">
+        <p class="card__eyebrow">Sales</p>
+        <h3>Pipeline</h3>
+        <p class="card__copy">24 deals awaiting review.</p>
+      </article>
+      <article class="card">
+        <p class="card__eyebrow">Support</p>
+        <h3>Response time</h3>
+        <p class="card__copy">Median reply in 2h 14m.</p>
+      </article>
+    </section>
+  </div>
+
+  <script type="module" src="./card-hover.js"></script>
+</body>
+</html>

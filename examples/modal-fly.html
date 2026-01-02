@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modal Fly Example</title>
+  <link rel="stylesheet" href="./modal-fly.css">
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div class="brand">Flowdesk</div>
+      <button class="button button--pill" data-open="modal" type="button">Open modal</button>
+    </header>
+
+    <section class="hero">
+      <h1>Confirm actions without leaving the page.</h1>
+      <p>Modal timelines keep overlays and panels in sync for clean open and close states.</p>
+    </section>
+  </div>
+
+  <div class="modal" aria-hidden="true">
+    <div class="modal__overlay"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Example modal">
+      <h2>Review changes</h2>
+      <p>Save your progress before switching to another view.</p>
+      <div class="modal__actions">
+        <button class="button button--ghost" data-close="modal" type="button">Cancel</button>
+        <button class="button button--pill" data-close="modal" type="button">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./modal-fly.js"></script>
+</body>
+</html>
