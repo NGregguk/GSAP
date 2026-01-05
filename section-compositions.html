@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Section Animation Compositions</title>
+  <link rel="stylesheet" href="./section-compositions.css">
+</head>
+<body>
+  <main class="page">
+    <div class="top-bar">
+      <div class="top-bar__inner">
+        <p class="top-bar__label">Navigation</p>
+        <div class="top-nav">
+          <a class="nav-link" href="./index.html">Text animations</a>
+          <a class="nav-link" href="./ui-animations.html">UI motion patterns</a>
+          <a class="nav-link active" href="./section-compositions.html" aria-current="page">Section compositions (current)</a>
+        </div>
+      </div>
+    </div>
+
+    <header class="page__header">
+      <p class="eyebrow">GSAP Compositions</p>
+      <h1 class="page__title">Section Animation Compositions</h1>
+      <p class="page__lede">
+        Full-width sections that blend text motion and UI state into cohesive, expressive layouts.
+      </p>
+    </header>
+
+    <section class="section section--team" data-comp="team">
+      <div class="section__inner">
+        <p class="eyebrow">Composition 1</p>
+        <h2 class="section__title" data-anim="team-title">Meet the team behind the work.</h2>
+        <p class="eyebrow">Live composed demo</p>
+        <div class="section__demo team-demo">
+          <div class="team-list" data-anim="team-list">
+            <button class="team-card is-active" type="button" data-name="Ava Martin" data-role="Creative Lead" data-bio="Shapes the visual system and keeps every motion beat intentional.">
+              <span class="team-avatar">A</span>
+              <span class="team-name">Ava</span>
+            </button>
+            <button class="team-card" type="button" data-name="Noah Brooks" data-role="Motion Engineer" data-bio="Builds the animation system and keeps timelines reusable.">
+              <span class="team-avatar">N</span>
+              <span class="team-name">Noah</span>
+            </button>
+            <button class="team-card" type="button" data-name="Mia Reyes" data-role="Product Design" data-bio="Balances clarity and character across every interaction.">
+              <span class="team-avatar">M</span>
+              <span class="team-name">Mia</span>
+            </button>
+            <button class="team-card" type="button" data-name="Leo Grant" data-role="Research" data-bio="Keeps the experience grounded in real user insight.">
+              <span class="team-avatar">L</span>
+              <span class="team-name">Leo</span>
+            </button>
+          </div>
+          <div class="team-spotlight" data-anim="team-spotlight">
+            <p class="team-spotlight__name">Ava Martin</p>
+            <p class="team-spotlight__role">Creative Lead</p>
+            <p class="team-spotlight__bio">Shapes the visual system and keeps every motion beat intentional.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--services" data-comp="services">
+      <div class="section__inner">
+        <p class="eyebrow">Composition 2</p>
+        <h2 class="section__title mask" data-anim="services-title">Services that stay in motion.</h2>
+        <p class="eyebrow">Live composed demo</p>
+        <div class="section__demo services-demo">
+          <div class="services-window">
+            <div class="services-rail" data-anim="services-rail">
+              <article class="service-card">
+                <p class="service-label">Strategy</p>
+                <h3>Motion direction</h3>
+                <p>Define the motion system and the experience arc.</p>
+              </article>
+              <article class="service-card">
+                <p class="service-label">Design</p>
+                <h3>Interface choreography</h3>
+                <p>Compose transitions that clarify hierarchy.</p>
+              </article>
+              <article class="service-card">
+                <p class="service-label">Build</p>
+                <h3>Production ready</h3>
+                <p>Deliver GSAP timelines that scale cleanly.</p>
+              </article>
+            </div>
+          </div>
+          <div class="services-controls">
+            <button class="button button--ghost" data-services="prev" type="button">Prev</button>
+            <button class="button button--pill" data-services="next" type="button">Next</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--contact" data-comp="contact">
+      <div class="section__inner">
+        <p class="eyebrow">Composition 3</p>
+        <h2 class="section__title" data-anim="contact-title">Contact that feels calm and direct.</h2>
+        <p class="eyebrow">Live composed demo</p>
+        <div class="section__demo contact-demo">
+          <form class="contact-form" data-anim="contact-form">
+            <label>
+              <span>Name</span>
+              <input type="text" placeholder="Your name" required>
+            </label>
+            <label>
+              <span>Email</span>
+              <input type="email" placeholder="you@example.com" required>
+            </label>
+            <label>
+              <span>Project</span>
+              <textarea rows="3" placeholder="Tell us what you're building"></textarea>
+            </label>
+            <button class="button button--pill" type="submit">Send request</button>
+            <p class="contact-status" aria-live="polite">Thanks, we will reply within 24 hours.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="./section-compositions.js"></script>
+  <script>
+    window.addEventListener("load", () => {
+      if (window.__sectionCompositionsInit) return;
+
+      const initTeam = () => {
+        const section = document.querySelector("[data-comp='team']");
+        if (!section) return;
+        const cards = [...section.querySelectorAll(".team-card")];
+        const spotlight = section.querySelector(".team-spotlight");
+        const nameEl = spotlight?.querySelector(".team-spotlight__name");
+        const roleEl = spotlight?.querySelector(".team-spotlight__role");
+        const bioEl = spotlight?.querySelector(".team-spotlight__bio");
+        if (!cards.length || !spotlight || !nameEl || !roleEl || !bioEl) return;
+
+        const switchTo = (card) => {
+          cards.forEach((btn) => btn.classList.toggle("is-active", btn === card));
+          nameEl.textContent = card.dataset.name || "";
+          roleEl.textContent = card.dataset.role || "";
+          bioEl.textContent = card.dataset.bio || "";
+        };
+
+        cards.forEach((card) => {
+          card.addEventListener("click", () => switchTo(card));
+        });
+      };
+
+      const initServices = () => {
+        const section = document.querySelector("[data-comp='services']");
+        if (!section) return;
+        const rail = section.querySelector(".services-rail");
+        const prev = section.querySelector("[data-services='prev']");
+        const next = section.querySelector("[data-services='next']");
+        const cards = rail ? [...rail.querySelectorAll(".service-card")] : [];
+        if (!rail || !prev || !next || !cards.length) return;
+
+        let index = 0;
+
+        const update = () => {
+          const gap = parseFloat(getComputedStyle(rail).columnGap || "14");
+          const width = cards[0].getBoundingClientRect().width + gap;
+          rail.style.transform = `translateX(${-width * index}px)`;
+          prev.disabled = index === 0;
+          next.disabled = index === cards.length - 1;
+        };
+
+        prev.addEventListener("click", () => {
+          index = Math.max(0, index - 1);
+          update();
+        });
+        next.addEventListener("click", () => {
+          index = Math.min(cards.length - 1, index + 1);
+          update();
+        });
+        window.addEventListener("resize", update);
+        update();
+      };
+
+      const initContact = () => {
+        const section = document.querySelector("[data-comp='contact']");
+        if (!section) return;
+        const form = section.querySelector(".contact-form");
+        const status = section.querySelector(".contact-status");
+        if (!form || !status) return;
+
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          status.classList.add("is-visible");
+          clearTimeout(status.__timeout);
+          status.__timeout = setTimeout(() => status.classList.remove("is-visible"), 2000);
+        });
+      };
+
+      initTeam();
+      initServices();
+      initContact();
+    });
+  </script>
+</body>
+</html>
